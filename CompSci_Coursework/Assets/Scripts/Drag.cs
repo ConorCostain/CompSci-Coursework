@@ -1,12 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
+public class Drag : MonoBehaviour,IBeginDragHandler, IDragHandler ,IEndDragHandler{
 
-public class Drag : MonoBehaviour {
+	public Transform ParentToReturnTo;
 
-	private void OnMouseDrag()
+	public void OnBeginDrag(PointerEventData eventdata)
 	{
-		transform.position = Vector3.right * Input.mousePosition.x + Vector3.up * Input.mousePosition.y + Vector3.back;
+		Debug.Log("Drag Started");
+		gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
+		ParentToReturnTo = transform.parent;
+		transform.SetParent(transform.parent.parent);
+	}
+
+	public void OnDrag(PointerEventData eventdata)
+	{
+		transform.position = eventdata.position;
+
+	}
+
+	public void OnEndDrag(PointerEventData eventdata)
+	{
+		Debug.Log("Drag Ended");
+		gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
+		transform.SetParent(ParentToReturnTo);
 	}
 }
