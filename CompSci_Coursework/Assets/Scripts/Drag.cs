@@ -6,25 +6,27 @@ using UnityEngine.EventSystems;
 public class Drag : MonoBehaviour,IBeginDragHandler, IDragHandler ,IEndDragHandler{
 
 	public Transform ParentToReturnTo;
+	public GameObject draggedObject;
 
 	public void OnBeginDrag(PointerEventData eventdata)
 	{
 		Debug.Log("Drag Started");
-		gameObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
+		
 		ParentToReturnTo = transform.parent;
-		transform.SetParent(transform.parent.parent);
+		draggedObject = Instantiate(gameObject, transform.parent.parent);
+		draggedObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
 	}
 
 	public void OnDrag(PointerEventData eventdata)
 	{
-		transform.position = eventdata.position;
+		draggedObject.transform.position = eventdata.position;
 
 	}
 
 	public void OnEndDrag(PointerEventData eventdata)
 	{
 		Debug.Log("Drag Ended");
-		gameObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
-		transform.SetParent(ParentToReturnTo);
+		draggedObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
+		draggedObject.transform.SetParent(ParentToReturnTo);
 	}
 }
