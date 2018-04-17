@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CodeList : MonoBehaviour {
+	
 
 	// Use this for initialization
 	void Start () {

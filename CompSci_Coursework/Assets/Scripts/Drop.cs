@@ -17,14 +17,19 @@ public class Drop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
 		switch (ZoneType)
 		{
 			case DropZoneType.Canvas:
+				eventData.pointerDrag.GetComponent<Drag>().ParentToReturnTo = transform;
 				return;
+
 			case DropZoneType.Roster:
 				Destroy(eventData.pointerDrag.GetComponent<Drag>().draggedObject);
 				return;
+
 			case DropZoneType.Bin:
 				Destroy(eventData.pointerDrag.GetComponent<Drag>().draggedObject);
 				return;
+
 			case DropZoneType.CodeList:
+				eventData.pointerDrag.GetComponent<Drag>().ParentToReturnTo = transform;
 				return;
 		}
 	}
