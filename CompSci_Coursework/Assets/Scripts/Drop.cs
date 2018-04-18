@@ -20,6 +20,7 @@ public class Drop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
 		switch (zoneType)
 		{
 			case DropZoneType.Canvas:
+
 				if (codeListPrefab != null)
 				{
 					GameObject codeList = Instantiate(codeListPrefab, transform.parent);
