@@ -8,29 +8,50 @@ using UnityEngine.EventSystems;
 public class Drop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDropHandler{
 
 	public enum DropZoneType {Canvas, Roster ,Bin, CodeList }
-	public DropZoneType ZoneType;
+	public DropZoneType zoneType;
+	public GameObject codeListPrefab;
 
 	public void OnDrop(PointerEventData eventData)
 	{
-		Debug.Log(eventData.pointerDrag.name + "Dropped on" + gameObject.name);
+		GameObject draggedObject = eventData.pointerDrag.GetComponent<Drag>().draggedObject;
+		CodeList oldCodeListScript = draggedObject.transform.parent.GetComponent<CodeList>();
+		Debug.Log(draggedObject.name + "Dropped on" + gameObject.name);
 		
-		switch (ZoneType)
+		switch (zoneType)
 		{
 			case DropZoneType.Canvas:
-				eventData.pointerDrag.GetComponent<Drag>().ParentToReturnTo = transform;
+				GameObject codeList = Instantiate(codeListPrefab, transform.parent);
+				codeList.GetComponent<RectTransform>().localPosition = draggedObject.GetComponent<RectTransform>().localPosition;
+				codeList.GetComponent<CodeList>().AddBlock(draggedObject);
 				return;
 
 			case DropZoneType.Roster:
-				Destroy(eventData.pointerDrag.GetComponent<Drag>().draggedObject);
+				Destroy(draggedObject);
 				return;
 
 			case DropZoneType.Bin:
-				Destroy(eventData.pointerDrag.GetComponent<Drag>().draggedObject);
+				Destroy(draggedObject);
 				return;
 
 			case DropZoneType.CodeList:
-				eventData.pointerDrag.GetComponent<Drag>().ParentToReturnTo = transform;
+				CodeList codeListScript = gameObject.transform.parent.GetComponent<CodeList>();
+				if (codeListScript != null)
+				{
+					Debug.Log("Code List Script Found");
+					codeListScript.AddBlock(draggedObject);
+				}
+				else
+				{
+					Debug.Log("No Code List Script found on Parent");
+				}
 				return;
+		}
+		//Checks to see if the block was previously in a code list and removes it
+		
+		if (oldCodeListScript != null)
+		{
+			oldCodeListScript.RemoveBlock(draggedObject);
+			
 		}
 	}
 
