@@ -67,7 +67,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11d00d456ab040469f76062efd774b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ZoneType: 3
+  zoneType: 3
+  codeListPrefab: {fileID: 0}
 --- !u!222 &222634779378488972
 CanvasRenderer:
   m_ObjectHideFlags: 1
