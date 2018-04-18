@@ -236,7 +236,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoneType: 0
-  codeListPrefab: {fileID: 0}
+  codeListPrefab: {fileID: 1154290468422320, guid: af351c67db8a4a540844238d7a47ecf6,
+    type: 2}
 --- !u!114 &434147169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -844,7 +845,7 @@ Prefab:
     - target: {fileID: 224746686614240962, guid: 8a3f1531f11112d4b97bd9cfadbbbb34,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 85.5
       objectReference: {fileID: 0}
     - target: {fileID: 224746686614240962, guid: 8a3f1531f11112d4b97bd9cfadbbbb34,
         type: 2}
@@ -869,7 +870,7 @@ Prefab:
     - target: {fileID: 224746686614240962, guid: 8a3f1531f11112d4b97bd9cfadbbbb34,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224746686614240962, guid: 8a3f1531f11112d4b97bd9cfadbbbb34,
         type: 2}
@@ -879,7 +880,7 @@ Prefab:
     - target: {fileID: 224746686614240962, guid: 8a3f1531f11112d4b97bd9cfadbbbb34,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224746686614240962, guid: 8a3f1531f11112d4b97bd9cfadbbbb34,
         type: 2}
