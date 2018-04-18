@@ -6,21 +6,26 @@ using UnityEngine.EventSystems;
 
 public class Drag : MonoBehaviour,IBeginDragHandler, IDragHandler ,IEndDragHandler{
 
-	public Transform ParentToReturnTo;
+	
 	public GameObject draggedObject;
 	
 
 	public void OnBeginDrag(PointerEventData eventdata)
 	{
 		Debug.Log("Drag Started");
+		draggedObject = gameObject;
 		
-		//ParentToReturnTo = transform.parent;
 
+		
+		
 		//If the block comes from the roster create a duplicate
-		if (transform.parent.GetComponent<Drop>().ZoneType == Drop.DropZoneType.Roster)
-			draggedObject = Instantiate(gameObject, Canvas(transform));
-		else
-			draggedObject = gameObject;
+		if (transform.parent.GetComponent<Drop>() != null)
+		{
+			if (transform.parent.GetComponent<Drop>().zoneType == Drop.DropZoneType.Roster)
+				draggedObject = Instantiate(gameObject, Canvas(transform)); 
+		}
+		
+		
 
 		draggedObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
 	}
@@ -35,7 +40,7 @@ public class Drag : MonoBehaviour,IBeginDragHandler, IDragHandler ,IEndDragHandl
 	{
 		Debug.Log("Drag Ended");
 		draggedObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
-		draggedObject.transform.SetParent(ParentToReturnTo);
+		
 	}
 
 	private Transform Canvas(Transform trans)	//checks through the parents to find the Canvas
