@@ -18,7 +18,7 @@ public class CodeList : MonoBehaviour {
 			paddingBlock = Instantiate(paddingPrefab, transform);
 		}
 		
-		return;
+		
 	}
 
 	//makes sure that the new code block is above the padding block for new blocks
@@ -30,7 +30,15 @@ public class CodeList : MonoBehaviour {
 		Debug.Log("Added to List");
 		block.transform.SetParent(transform);
 		Debug.Log("Parent set as code list");
-		paddingBlock.transform.SetAsLastSibling();
+		
+		try
+		{
+			paddingBlock.transform.SetAsLastSibling();
+		}
+		catch
+		{
+			Debug.Log("Padding block already last sibling");
+		}
 		
 	}
 

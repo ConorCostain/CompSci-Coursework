@@ -21,8 +21,12 @@ public class Drag : MonoBehaviour,IBeginDragHandler, IDragHandler ,IEndDragHandl
 		//If the block comes from the roster create a duplicate
 		if (transform.parent.GetComponent<Drop>() != null)
 		{
+			Debug.Log("Parent has a drop script");
 			if (transform.parent.GetComponent<Drop>().zoneType == Drop.DropZoneType.Roster)
+			{
+				Debug.Log("Roster duplicate created");
 				draggedObject = Instantiate(gameObject, Canvas(transform)); 
+			}
 		}
 		
 		

@@ -90,7 +90,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b86125bbc349bed4ca17c56fb56b746f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ParentToReturnTo: {fileID: 0}
   draggedObject: {fileID: 0}
 --- !u!114 &114670478520662564
 MonoBehaviour:
@@ -103,7 +102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11d00d456ab040469f76062efd774b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ZoneType: 3
+  zoneType: 3
+  codeListPrefab: {fileID: 0}
 --- !u!114 &114819252482834268
 MonoBehaviour:
   m_ObjectHideFlags: 1
