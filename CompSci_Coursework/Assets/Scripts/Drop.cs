@@ -91,7 +91,7 @@ public class Drop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
 				CodeList draggedListScript = draggedObject.GetComponent<CodeList>();
 				if(draggedListScript != null)
 				{
-					codeListScript.AddBlock(draggedListScript.codeList);
+					codeListScript.AddBlock(draggedListScript);
 				}
 			}
 		}

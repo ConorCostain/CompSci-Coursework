@@ -34,6 +34,7 @@ public class Drag : MonoBehaviour,IBeginDragHandler, IDragHandler ,IEndDragHandl
 		{
 			//Sets the dragged object to the code list that carrys the handle
 			draggedObject = gameObject.transform.parent.gameObject;
+			setChildrenRayCasts(draggedObject, false);
 		}
 		
 	}
@@ -41,7 +42,6 @@ public class Drag : MonoBehaviour,IBeginDragHandler, IDragHandler ,IEndDragHandl
 	// Method is regularly called throughout the duration of the drag
 	public void OnDrag(PointerEventData eventdata)
 	{
-		// Sets the position of the object to that of the cursor
 		draggedObject.transform.position = eventdata.position;
 	}
 
@@ -49,7 +49,30 @@ public class Drag : MonoBehaviour,IBeginDragHandler, IDragHandler ,IEndDragHandl
 	public void OnEndDrag(PointerEventData eventdata)
 	{
 		Debug.Log("Drag Ended");
-		draggedObject.GetComponent<CanvasGroup>().blocksRaycasts = true;
+		if (gameObject.tag == "CodeBlock")
+		{
+			draggedObject.GetComponent<CanvasGroup>().blocksRaycasts = true; 
+		}
+		else if(gameObject.tag == "CodeListHandle")
+		{
+			setChildrenRayCasts(draggedObject, true);
+		}
+	}
+
+	//sets all the raycasts of the children to the desired value
+	private void setChildrenRayCasts(GameObject parent, bool raycastValue)
+	{
+		Debug.Log("Child raycastst set to " + (raycastValue ? "true" : "false"));
+		CanvasGroup canvasGroupScript;
+		for (int i = 0; i < parent.transform.childCount; i++)
+		{
+			canvasGroupScript = parent.transform.GetChild(i).GetComponent<CanvasGroup>();
+			if(canvasGroupScript != null)
+			{
+				canvasGroupScript.blocksRaycasts = raycastValue;
+			}
+				
+		}
 	}
 
 	//The canvas is the highest level in the UI Hierarchy so we can recursively check upwards until found
