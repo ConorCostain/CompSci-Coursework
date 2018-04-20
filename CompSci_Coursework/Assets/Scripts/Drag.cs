@@ -9,23 +9,32 @@ public class Drag : MonoBehaviour,IBeginDragHandler, IDragHandler ,IEndDragHandl
 	// Method called when a drag is started on the gameobject with this script on it
 	public void OnBeginDrag(PointerEventData eventdata)
 	{
-		Debug.Log("Drag Started");
-		draggedObject = gameObject;
-	
-		//If the block comes from the roster create a duplicate
-		if (transform.parent.GetComponent<Drop>() != null)	//Prevents crashing from no drop script
+
+		if (gameObject.tag == "CodeBlock")
 		{
-			Debug.Log("Parent has a drop script");
-			// If the block is from a roster then it creates a duplicate instead of dragging the
-			// original object
-			if (transform.parent.GetComponent<Drop>().zoneType == Drop.DropZoneType.Roster)
+			Debug.Log("Drag Started");
+			draggedObject = gameObject;
+
+			//If the block comes from the roster create a duplicate
+			if (transform.parent.GetComponent<Drop>() != null)  //Prevents crashing from no drop script
 			{
-				Debug.Log("Roster duplicate created");
-				draggedObject = Instantiate(gameObject, GetCanvas(transform)); 
+				Debug.Log("Parent has a drop script");
+				// If the block is from a roster then it creates a duplicate instead of dragging the
+				// original object
+				if (transform.parent.GetComponent<Drop>().zoneType == Drop.DropZoneType.Roster)
+				{
+					Debug.Log("Roster duplicate created");
+					draggedObject = Instantiate(gameObject, GetCanvas(transform));
+				}
 			}
+			// Prevents the block being dragged being detected when searching for what it's dropped on
+			draggedObject.GetComponent<CanvasGroup>().blocksRaycasts = false; 
 		}
-		// Prevents the block being dragged being detected when searching for what it's dropped on
-		draggedObject.GetComponent<CanvasGroup>().blocksRaycasts = false;
+		else if(gameObject.tag == "CodeListHandle")
+		{
+			//Sets the dragged object to the code list that carrys the handle
+			draggedObject = gameObject.transform.parent.gameObject;
+		}
 		
 	}
 

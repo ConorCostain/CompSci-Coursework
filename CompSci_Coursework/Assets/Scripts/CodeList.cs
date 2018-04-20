@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CodeList : MonoBehaviour {
 
-	//Stores the Prefab to instantiate a padding block
+	//Stores the Prefab to instantiate a padding block and handle
+	public GameObject handlePrefab;
 	public GameObject paddingPrefab;
-	//A reference to the padding block once instantiated
+	//A reference to the padding and handle block once instantiated
+	private GameObject handleBlock;
 	private GameObject paddingBlock;
 	//The list providing reference to each of the code blocks and the order to process them
 	public Queue<GameObject> codeList = new Queue<GameObject>();
@@ -13,6 +16,11 @@ public class CodeList : MonoBehaviour {
 	//Is called when script is initialized/game starts
 	public void Start()
 	{
+		if(handlePrefab != null)
+		{
+			handleBlock = Instantiate(handlePrefab, transform);
+			handleBlock.transform.SetAsFirstSibling();
+		}
 		if(paddingPrefab != null)
 		{
 			paddingBlock = Instantiate(paddingPrefab, transform);
@@ -30,6 +38,26 @@ public class CodeList : MonoBehaviour {
 		Debug.Log("Parent set as code list");
 		try
 		{	//If the Padding block is already last sibling it will throw an exception
+			paddingBlock.transform.SetAsLastSibling();
+		}
+		catch
+		{
+			Debug.Log("Padding block already last sibling");
+		}
+	}
+
+	//Method overloading so that same method may be used to add a queue or a single block
+	public void AddBlock(Queue<GameObject> newCodeQueue)
+	{
+
+		//Lambda expression used to quickly run through the queue and add it to the main code list
+		newCodeQueue.ToList<GameObject>().ForEach(block => 
+			{
+				codeList.Enqueue(block);
+				block.transform.SetParent(transform);
+			});
+		try
+		{   //If the Padding block is already last sibling it will throw an exception
 			paddingBlock.transform.SetAsLastSibling();
 		}
 		catch

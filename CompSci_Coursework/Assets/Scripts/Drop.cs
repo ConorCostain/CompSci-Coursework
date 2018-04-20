@@ -15,7 +15,12 @@ public class Drop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
 		//Stores the object that was just dropped for easy access
 		GameObject draggedObject = eventData.pointerDrag.GetComponent<Drag>().draggedObject;
 		//If the Block was from a code list gets a reference to the script before the parent changes
-		CodeList oldCodeList = draggedObject.transform.parent.GetComponent<CodeList>();
+		CodeList oldCodeList = null;
+		if (draggedObject.tag == "CodeBlock")
+		{
+			oldCodeList = draggedObject.transform.parent.GetComponent<CodeList>(); 
+		}
+		
 		Debug.Log(draggedObject.name + "Dropped on" + gameObject.name);
 
 		if (draggedObject != null)	//Defensive programming just in case there is no dragged object somehow
@@ -50,18 +55,21 @@ public class Drop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
 	//Method called when block is dropped onto a Canvas Drop Zone
 	private void CanvasDropZone(GameObject draggedObject)
 	{
-		if (codeListPrefab != null) //Ensures there is a link to the prefab for a new Code List
+		if (draggedObject.tag == "CodeBlock")
 		{
-			//Creates a new code list
-			GameObject codeList = Instantiate(codeListPrefab, transform.parent);
-			//Sets its position to that of the drop location
-			codeList.GetComponent<RectTransform>().position = draggedObject.GetComponent<RectTransform>().position;
-			//Calls the AddBlock method on the Code List which adds it to the list and changes its parent
-			codeList.GetComponent<CodeList>().AddBlock(draggedObject);
-		}
-		else
-		{
-			Debug.Log("No Code List Prefab");
+			if (codeListPrefab != null) //Ensures there is a link to the prefab for a new Code List
+			{
+				//Creates a new code list
+				GameObject codeList = Instantiate(codeListPrefab, transform.parent);
+				//Sets its position to that of the drop location
+				codeList.GetComponent<RectTransform>().position = draggedObject.GetComponent<RectTransform>().position;
+				//Calls the AddBlock method on the Code List which adds it to the list and changes its parent
+				codeList.GetComponent<CodeList>().AddBlock(draggedObject);
+			}
+			else
+			{
+				Debug.Log("No Code List Prefab");
+			} 
 		}
 	}
 
@@ -74,7 +82,18 @@ public class Drop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
 		{
 			Debug.Log("Code List Script Found");
 			//Calls the AddBlock method on the Code List script
-			codeListScript.AddBlock(draggedObject);
+			if (draggedObject.tag == "CodeBlock")
+			{
+				codeListScript.AddBlock(draggedObject); 
+			}
+			else if(draggedObject.tag == "CodeList")
+			{
+				CodeList draggedListScript = draggedObject.GetComponent<CodeList>();
+				if(draggedListScript != null)
+				{
+					codeListScript.AddBlock(draggedListScript.codeList);
+				}
+			}
 		}
 		else
 		{
