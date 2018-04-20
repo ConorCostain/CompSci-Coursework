@@ -2,7 +2,8 @@
 using System.Linq;
 using UnityEngine;
 
-public class CodeList : MonoBehaviour {
+public class CodeList : MonoBehaviour
+{
 
 	//Stores the Prefab to instantiate a padding block and handle
 	public GameObject handlePrefab;
@@ -16,12 +17,12 @@ public class CodeList : MonoBehaviour {
 	//Is called when script is initialized/game starts
 	public void Start()
 	{
-		if(handlePrefab != null)
+		if (handlePrefab != null)
 		{
 			handleBlock = Instantiate(handlePrefab, transform);
 			handleBlock.transform.SetAsFirstSibling();
 		}
-		if(paddingPrefab != null)
+		if (paddingPrefab != null)
 		{
 			paddingBlock = Instantiate(paddingPrefab, transform);
 		}
@@ -37,26 +38,6 @@ public class CodeList : MonoBehaviour {
 		block.transform.SetParent(transform);
 		Debug.Log("Parent set as code list");
 		try
-		{	//If the Padding block is already last sibling it will throw an exception
-			paddingBlock.transform.SetAsLastSibling();
-		}
-		catch
-		{
-			Debug.Log("Padding block already last sibling");
-		}
-	}
-
-	//Method overloading so that same method may be used to add a queue or a single block
-	public void AddBlock(Queue<GameObject> newCodeQueue)
-	{
-
-		//Lambda expression used to quickly run through the queue and add it to the main code list
-		newCodeQueue.ToList<GameObject>().ForEach(block => 
-			{
-				codeList.Enqueue(block);
-				block.transform.SetParent(transform);
-			});
-		try
 		{   //If the Padding block is already last sibling it will throw an exception
 			paddingBlock.transform.SetAsLastSibling();
 		}
@@ -66,13 +47,35 @@ public class CodeList : MonoBehaviour {
 		}
 	}
 
+	//Method overloading so that same method may be used to add a queue or a single block
+	public void AddBlock(CodeList secondCodeList)
+	{
+
+		//Lambda expression used to quickly run through the queue and add it to the main code list
+		secondCodeList.codeList.ToList<GameObject>().ForEach(block =>
+		{
+			codeList.Enqueue(block);
+			block.transform.SetParent(transform);
+		});
+		try
+		{   //If the Padding block is already last sibling it will throw an exception
+			paddingBlock.transform.SetAsLastSibling();
+		}
+		catch
+		{
+			Debug.Log("Padding block already last sibling");
+		}
+		//Destroys old Code List once added to the new one
+		Destroy(secondCodeList.gameObject);
+	}
+
 	//Removes the block from the queue and if the queue is now empty the code list is destroyed
 	public void RemoveBlock(GameObject block)
 	{
 		codeList = ElementExtractor<GameObject>(codeList, block);
 		Debug.Log("Removing block from code list");
-		
-		if(codeList.Count < 1)
+
+		if (codeList.Count < 1)
 		{
 			Debug.Log("Destroying Code List");
 			Destroy(gameObject);
@@ -86,13 +89,13 @@ public class CodeList : MonoBehaviour {
 		Queue<T> newQueue = new Queue<T>();
 		T temp;
 
-		while(queue.Count > 0)
+		while (queue.Count > 0)
 		{
 			temp = queue.Dequeue();
 
-			if(element.Equals(temp) )
+			if (element.Equals(temp))
 			{
-				while(queue.Count > 0)
+				while (queue.Count > 0)
 				{
 					newQueue.Enqueue(queue.Dequeue());
 				}
