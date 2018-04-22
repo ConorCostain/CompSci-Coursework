@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlaySessionManager : MonoBehaviour {
 
+	// General Setup of PlaySessionManager
 	public static PlaySessionManager ins;
 
 	void Awake()	// Runs when script is loaded, before game runs
@@ -23,6 +24,13 @@ public class PlaySessionManager : MonoBehaviour {
 		}
 	}
 
+	//Declaration of Lists and Variables
+
+	private List<int> inputList = new List<int>();
+
+	private List<int> OutputList = new List<int>();
+
+	public List<Variable> variableList = new List<Variable>();
 	
 
 }
