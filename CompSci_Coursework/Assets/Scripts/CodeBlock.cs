@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using TMPro;
 
 public class CodeBlock : MonoBehaviour {
+
+	public enum CodeBlockType {Add, Subtract, Multiply, Divide, VariableSet, If, While, Output}
+	public CodeBlockType blockType;
 
 	public Variable param1;
 	public Variable param2;
 	public Variable param3;
 
+	public GameObject inputField1;
+	public GameObject inputField2;
+	public GameObject inputField3;
+
 	private BaseCodeBlock codeBlock = null;
 
-	private enum CodeBlockType {Add, Subtract, Multiply, Divide, VariableSet, If, While, Output}
-
-	private CodeBlockType blockType;
 
 	public void Start()
 	{
@@ -43,6 +48,23 @@ public class CodeBlock : MonoBehaviour {
 
 	public BaseCodeBlock GetCodeBlock()
 	{
+		// Before The code block is returned it is checked to make sure all parameters are correct
+		if(inputField1 != null || inputField1.GetComponent<TMP_InputField>() != null)
+		{
+			setParam(1, inputField1.GetComponent<TMP_InputField>().text);
+		}
+		if (inputField2 != null || inputField1.GetComponent<TMP_InputField>() != null)
+		{
+			setParam(2, inputField1.GetComponent<TMP_InputField>().text);
+		}
+		if (inputField3 != null || inputField1.GetComponent<TMP_InputField>() != null)
+		{
+			setParam(3, inputField1.GetComponent<TMP_InputField>().text);
+		}
+
+		//Sets the params in the object
+		codeBlock.SetParams(param1, param2, param3);
+
 		return codeBlock;
 	}
 

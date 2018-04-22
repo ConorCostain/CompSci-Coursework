@@ -21,4 +21,12 @@ public class OperatorCodeBlock :VariableSet {
 	{
 		var1 = opFunc(var2, var3);
 	}
+
+	//Replaces the old SetParams to set all three parameters
+	public new void SetParams(Variable param1, Variable param2, Variable param3)
+	{
+		this.param1 = param1;
+		this.param2 = param2;
+		this.param3 = param3;
+	}
 }

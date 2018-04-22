@@ -21,5 +21,11 @@ public abstract class BaseCodeBlock{
 	//Abstract method
 	public abstract void CodeBlockFunction();
 
+	//still takes three parameters so all codeblocks can be sent all three and the uneeded ones will be ignored
+	public void SetParams(Variable param1, Variable param2, Variable param3)
+	{
+		this.param1 = param1;
+	}
+
 
 }
