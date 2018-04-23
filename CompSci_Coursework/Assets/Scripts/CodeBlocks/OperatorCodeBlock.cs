@@ -2,6 +2,7 @@
 public class OperatorCodeBlock :VariableSet {
 
 	protected delegate Variable OperatorFunction(Variable var1, Variable var2);
+	
 
 	protected Variable param3;
 

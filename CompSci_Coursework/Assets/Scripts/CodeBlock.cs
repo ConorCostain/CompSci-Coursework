@@ -9,6 +9,8 @@ public class CodeBlock : MonoBehaviour {
 	public enum CodeBlockType {Add, Subtract, Multiply, Divide, VariableSet, If, While, Output}
 	public CodeBlockType blockType;
 
+	public delegate void CodeFunction();
+
 	public Variable param1;
 	public Variable param2;
 	public Variable param3;
@@ -46,7 +48,7 @@ public class CodeBlock : MonoBehaviour {
 		}
 	}
 
-	public BaseCodeBlock GetCodeBlock()
+	public CodeFunction GetCodeFunction()
 	{
 		// Before The code block is returned it is checked to make sure all parameters are correct
 		if(inputField1 != null || inputField1.GetComponent<TMP_InputField>() != null)
@@ -65,7 +67,7 @@ public class CodeBlock : MonoBehaviour {
 		//Sets the params in the object
 		codeBlock.SetParams(param1, param2, param3);
 
-		return codeBlock;
+		return new CodeFunction(codeBlock.CodeBlockFunction);
 	}
 
 	public void setParam(int paramNumber, string paramData)

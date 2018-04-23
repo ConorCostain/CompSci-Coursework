@@ -16,7 +16,7 @@ public class Drop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
 		GameObject draggedObject = eventData.pointerDrag.GetComponent<Drag>().draggedObject;
 		//If the Block was from a code list gets a reference to the script before the parent changes
 		CodeList oldCodeList = null;
-		if (draggedObject.tag == "CodeBlock")
+		if (draggedObject.tag == "CodeBlock" || gameObject.tag == "StartBlock")
 		{
 			oldCodeList = draggedObject.transform.parent.GetComponent<CodeList>(); 
 		}
@@ -55,7 +55,7 @@ public class Drop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
 	//Method called when block is dropped onto a Canvas Drop Zone
 	private void CanvasDropZone(GameObject draggedObject)
 	{
-		if (draggedObject.tag == "CodeBlock")
+		if (draggedObject.tag == "CodeBlock" || gameObject.tag == "StartBlock")
 		{
 			if (codeListPrefab != null) //Ensures there is a link to the prefab for a new Code List
 			{
@@ -82,7 +82,7 @@ public class Drop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
 		{
 			Debug.Log("Code List Script Found");
 			//Calls the AddBlock method on the Code List script
-			if (draggedObject.tag == "CodeBlock")
+			if (draggedObject.tag == "CodeBlock" || gameObject.tag == "StartBlock")
 			{
 				codeListScript.AddBlock(draggedObject); 
 			}

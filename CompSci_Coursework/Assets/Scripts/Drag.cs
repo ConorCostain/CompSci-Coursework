@@ -10,7 +10,7 @@ public class Drag : MonoBehaviour,IBeginDragHandler, IDragHandler ,IEndDragHandl
 	public void OnBeginDrag(PointerEventData eventdata)
 	{
 
-		if (gameObject.tag == "CodeBlock")
+		if (gameObject.tag == "CodeBlock" || gameObject.tag == "StartBlock")
 		{
 			Debug.Log("Drag Started");
 			draggedObject = gameObject;
@@ -49,7 +49,7 @@ public class Drag : MonoBehaviour,IBeginDragHandler, IDragHandler ,IEndDragHandl
 	public void OnEndDrag(PointerEventData eventdata)
 	{
 		Debug.Log("Drag Ended");
-		if (gameObject.tag == "CodeBlock")
+		if (gameObject.tag == "CodeBlock" || gameObject.tag == "StartBlock")
 		{
 			draggedObject.GetComponent<CanvasGroup>().blocksRaycasts = true; 
 		}

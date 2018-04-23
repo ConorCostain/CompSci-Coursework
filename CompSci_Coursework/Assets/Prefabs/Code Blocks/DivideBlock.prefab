@@ -211,7 +211,6 @@ GameObject:
   - component: {fileID: 114078527151956680}
   - component: {fileID: 225333056885991208}
   - component: {fileID: 114819197348603102}
-  - component: {fileID: 114295661461558548}
   - component: {fileID: 114168556635522154}
   - component: {fileID: 114776989490411098}
   m_Layer: 5
@@ -449,7 +448,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: d1e5a435f1827ff4a8af3e8dc665cbce, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 73abfa7ab8d3fd04cbb0d3c6dd80627a, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -610,19 +609,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114295661461558548
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1607122268028924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f11d00d456ab040469f76062efd774b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zoneType: 0
-  codeListPrefab: {fileID: 0}
 --- !u!114 &114403089220240752
 MonoBehaviour:
   m_ObjectHideFlags: 1

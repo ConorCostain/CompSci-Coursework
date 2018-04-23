@@ -9,7 +9,6 @@ public abstract class BaseCodeBlock{
 	public void SetParam1(Variable param)
 	{
 		param1 = param;
-		
 	}
 
 	public Variable GetParam1()

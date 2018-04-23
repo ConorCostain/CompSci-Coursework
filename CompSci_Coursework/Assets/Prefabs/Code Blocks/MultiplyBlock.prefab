@@ -58,7 +58,6 @@ GameObject:
   - component: {fileID: 114125055109978958}
   - component: {fileID: 225878071197586370}
   - component: {fileID: 114041758599678648}
-  - component: {fileID: 114511362595752748}
   - component: {fileID: 114787707061091020}
   - component: {fileID: 114270087032456416}
   m_Layer: 5
@@ -467,7 +466,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: d1e5a435f1827ff4a8af3e8dc665cbce, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a3551104778e5d3479b21341d171eebe, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1257,19 +1256,6 @@ MonoBehaviour:
   m_RestoreOriginalTextOnEscape: 1
   m_isRichTextEditingAllowed: 0
   m_InputValidator: {fileID: 0}
---- !u!114 &114511362595752748
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1168624198480992}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f11d00d456ab040469f76062efd774b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zoneType: 0
-  codeListPrefab: {fileID: 0}
 --- !u!114 &114519472559132948
 MonoBehaviour:
   m_ObjectHideFlags: 1

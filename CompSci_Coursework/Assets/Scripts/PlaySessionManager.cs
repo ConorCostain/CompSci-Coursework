@@ -33,4 +33,20 @@ public class PlaySessionManager : MonoBehaviour {
 	public List<Variable> variableList = new List<Variable>();
 	
 
+	public void CodeInterpreter(Queue<GameObject> codeList)
+	{
+		GameObject temp = null;
+		CodeBlock tempScript = null;
+		while(codeList.Count > 0)
+		{
+			temp = codeList.Dequeue();
+			tempScript = temp.GetComponent<CodeBlock>();
+			if(tempScript != null)
+			{
+				tempScript.GetCodeFunction()();
+			}
+		}
+
+	}
+
 }

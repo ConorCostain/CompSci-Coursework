@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222650370306096002}
   - component: {fileID: 114797553957193140}
   - component: {fileID: 114788009306072344}
+  - component: {fileID: 225317725256007988}
   m_Layer: 5
   m_Name: CodeListHandle
   m_TagString: CodeListHandle
@@ -92,3 +93,14 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 80, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225317725256007988
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1452066088498400}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
