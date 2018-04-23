@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlaySessionManager : MonoBehaviour {
 
@@ -11,34 +12,28 @@ public class PlaySessionManager : MonoBehaviour {
 	private List<int> inputList = new List<int>();
 	private List<int> expectedOutputs = new List<int>();
 	private List<int> outputList = new List<int>();
+	private ObjectiveManager objManager;
+	private TMP_Text outputText;
 	public List<Variable> variableList = new List<Variable>();
 	
-	//Set functions for InputList and Expected Outputs
-	public void SetInputList(List<int> inputList)
+	//One method for the Objective manager to call to pass through the required values
+	public void ObjectivesSetup(List<int> inputList, List<int> expectedOutputs,ObjectiveManager objManager, TMP_Text outputText)
 	{
 		this.inputList = inputList;
-	}
-
-	public void SetexpectedOutputsList(List<int> expectedOutputs)
-	{
 		this.expectedOutputs = expectedOutputs;
+		this.objManager = objManager;
+		this.outputText = outputText;
 	}
 
-	//Method overloading allowing for a singular element to be passed through
-	public void SetInputList(int input)
-	{
-		this.inputList.Add(input);
-	}
-
-	public void SetExpectedOutputsList(int output)
-	{
-		this.expectedOutputs.Add(output);
-	}
-
+	//Adds the value to the List and also adds it to the linked UI element to display the output to the user
 	public void Output(Variable output)
 	{
 		Debug.Log("Output: " + output.GetValue().ToString());
 		outputList.Add(output.GetValue());
+		if(objManager != null && outputText != null)
+		{
+			objManager.AddToTMP<int>(outputText, output.GetValue());
+		}
 	}
 
 	// General Setup of PlaySessionManager
@@ -76,8 +71,10 @@ public class PlaySessionManager : MonoBehaviour {
 	{
 		if (useInput && inputList.Count > 0)
 		{
+			int count = 1;
 			foreach (int input in inputList)
 			{
+				Debug.Log("Code Interpreter Run :" + count++);
 				inputVariableSetup(input);
 				ExecuteCodeList(codeList);
 			} 
@@ -92,7 +89,7 @@ public class PlaySessionManager : MonoBehaviour {
 	{
 		// Checks whether the input variable is in the variable list yet and if not adds it
 			//Use of Lambda Expresion
-		if (variableList.Where(v => v.GetName() == "input").Count() > 0)
+		if (!(variableList.Where(v => v.GetName() == "input").Count() > 0))
 		{
 			variableList.Add(new Variable("input", -1, input));
 		}
@@ -106,12 +103,14 @@ public class PlaySessionManager : MonoBehaviour {
 
 	private void ExecuteCodeList(Queue<GameObject> codeList)
 	{
+		Debug.Log("CodeList count = " + codeList.Count);
 		//Temporary variables to hold values
 		GameObject temp = null;
 		CodeBlock tempScript = null;
 		//Code List put into a temp so that when dequeued it does not break the original queue
 		//and then it the process of going through the code list may be repeated if necessary
-		Queue<GameObject> tempList = codeList;
+		//Creating a deep clone using reflection
+		Queue<GameObject> tempList = new Queue<GameObject>(codeList);
 
 
 		//Loops through all elements of the queue

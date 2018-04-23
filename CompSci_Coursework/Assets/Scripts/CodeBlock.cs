@@ -32,7 +32,7 @@ public class CodeBlock : MonoBehaviour {
 				break;
 
 			case CodeBlockType.Subtract:
-				codeBlock = new Add();
+				codeBlock = new Subtract();
 				break;
 
 			case CodeBlockType.Multiply:
@@ -78,7 +78,8 @@ public class CodeBlock : MonoBehaviour {
 	public void setParam(int paramNumber, string paramData)
 	{
 		Variable tempParam;
-		
+		paramData = paramData.ToLower();
+
 		//Use of Try Catch for defensive programming
 		try
 		{
@@ -90,7 +91,7 @@ public class CodeBlock : MonoBehaviour {
 	
 			
 			//If there is a variable without the name
-			if(PlaySessionManager.ins.variableList.Where(v => v.GetName() == paramData.ToLower()).Count() == 0)
+			if(PlaySessionManager.ins.variableList.Where(v => v.GetName() == paramData).Count() == 0)
 			{
 				//Create a new variable with said name
 				PlaySessionManager.ins.variableList
@@ -99,12 +100,12 @@ public class CodeBlock : MonoBehaviour {
 			//Get a set the value and name from the variable with the name in the list
 			//use of Lambda Expresion
 			tempParam = PlaySessionManager.ins.variableList
-				.Where(v => v.GetName() == paramData.ToLower()).FirstOrDefault();
+				.Where(v => v.GetName() == paramData).FirstOrDefault();
 			//Set the index of the parameter to that of the index of the variable in the variable list
 			tempParam = new Variable(paramData, PlaySessionManager.ins.variableList.IndexOf(tempParam), tempParam.GetValue());
-			Debug.Log(tempParam.GetName());
+			
 		}
-		Debug.Log(tempParam.GetValue().ToString());
+		
 
 		switch (paramNumber)
 		{
