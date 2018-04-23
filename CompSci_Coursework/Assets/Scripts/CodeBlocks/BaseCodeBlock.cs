@@ -4,18 +4,12 @@ using System.Collections.Generic;
 //Use of an Abstract class
 public abstract class BaseCodeBlock{
 
-	protected Variable param1;
+	protected Variable param1 { get; set; }
 
-	public void SetParam1(Variable param)
-	{
-		param1 = param;
-	}
+	protected Variable param2 { get; set; }
 
-	public Variable GetParam1()
-	{
-		return param1;
+	protected Variable param3 { get; set; }
 
-	}
 
 	//Abstract method
 	public abstract void CodeBlockFunction();
@@ -24,6 +18,8 @@ public abstract class BaseCodeBlock{
 	public void SetParams(Variable param1, Variable param2, Variable param3)
 	{
 		this.param1 = param1;
+		this.param2 = param2;
+		this.param3 = param3;
 	}
 
 

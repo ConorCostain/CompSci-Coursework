@@ -34,17 +34,12 @@ public class CodeList : MonoBehaviour
 	{
 		Debug.Log(block.name);
 		codeList.Enqueue(block);
-		Debug.Log("Added to List");
 		block.transform.SetParent(transform);
-		Debug.Log("Parent set as code list");
 		try
 		{   //If the Padding block is already last sibling it will throw an exception
 			paddingBlock.transform.SetAsLastSibling();
 		}
-		catch
-		{
-			Debug.Log("Padding block already last sibling");
-		}
+		catch { }
 	}
 
 	//Method overloading so that same method may be used to add a queue or a single block

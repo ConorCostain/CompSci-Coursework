@@ -72,44 +72,59 @@ public class PlaySessionManager : MonoBehaviour {
 	
 
 	//The main function which takes in a CodeList and Runs the code functions of it
-	public void CodeInterpreter(Queue<GameObject> codeList)
+	public void CodeInterpreter(Queue<GameObject> codeList, bool useInput = true)
 	{
-		foreach (int input in inputList)
+		if (useInput && inputList.Count > 0)
 		{
-			//Checks whether the input variable is in the variable list yet and if not adds it
-			//Use of Lambda Expresion
-			if (variableList.Where(v => v.GetName() == "input" ).Count() > 0)
+			foreach (int input in inputList)
 			{
-				variableList.Add(new Variable("input", -1, input)); 
-			}
-			//If the input variable is in the list then the value is set to the current value
-			else
-			{
-				//Use of Lambda Expression
-				variableList.Where(v => v.GetName() == "input").FirstOrDefault().SetValue(input);
-			}
-
-			//Temporary variables to hold values
-			GameObject temp = null;
-			CodeBlock tempScript = null;
-			//Code List put into a temp so that when dequeued it does not break the original queue
-			//and then it the process of going through the code list may be repeated if necessary
-			Queue<GameObject> tempList = codeList;
-
-
-			//Loops through all elements of the queue
-			while (tempList.Count > 0)
-			{
-				temp = tempList.Dequeue();
-				tempScript = temp.GetComponent<CodeBlock>();
-				if (tempScript != null)
-				{
-					//Returns and Invokes the delegate containing reference to the code block function
-					tempScript.GetCodeFunction().Invoke();
-				}
+				inputVariableSetup(input);
+				ExecuteCodeList(codeList);
 			} 
 		}
+		else
+		{
+			ExecuteCodeList(codeList);
+		}
+	}
 
+	private void inputVariableSetup(int input)
+	{
+		// Checks whether the input variable is in the variable list yet and if not adds it
+			//Use of Lambda Expresion
+		if (variableList.Where(v => v.GetName() == "input").Count() > 0)
+		{
+			variableList.Add(new Variable("input", -1, input));
+		}
+		//If the input variable is in the list then the value is set to the current value
+		else
+		{
+			//Use of Lambda Expression
+			variableList.Where(v => v.GetName() == "input").FirstOrDefault().SetValue(input);
+		}
+	}
+
+	private void ExecuteCodeList(Queue<GameObject> codeList)
+	{
+		//Temporary variables to hold values
+		GameObject temp = null;
+		CodeBlock tempScript = null;
+		//Code List put into a temp so that when dequeued it does not break the original queue
+		//and then it the process of going through the code list may be repeated if necessary
+		Queue<GameObject> tempList = codeList;
+
+
+		//Loops through all elements of the queue
+		while (tempList.Count > 0)
+		{
+			temp = tempList.Dequeue();
+			tempScript = temp.GetComponent<CodeBlock>();
+			if (tempScript != null)
+			{
+				//Returns and Invokes the delegate containing reference to the code block function
+				tempScript.GetCodeFunction().Invoke();
+			}
+		}
 	}
 
 }

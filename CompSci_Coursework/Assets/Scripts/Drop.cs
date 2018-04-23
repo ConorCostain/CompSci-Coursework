@@ -20,8 +20,6 @@ public class Drop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
 		{
 			oldCodeList = draggedObject.transform.parent.GetComponent<CodeList>(); 
 		}
-		
-		Debug.Log(draggedObject.name + "Dropped on" + gameObject.name);
 
 		if (draggedObject != null)	//Defensive programming just in case there is no dragged object somehow
 		{
@@ -80,7 +78,6 @@ public class Drop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
 		CodeList codeListScript = gameObject.transform.parent.GetComponent<CodeList>();
 		if (codeListScript != null) //Ensures that a script is found
 		{
-			Debug.Log("Code List Script Found");
 			//Calls the AddBlock method on the Code List script
 			if (draggedObject.tag == "CodeBlock" || gameObject.tag == "StartBlock")
 			{
@@ -113,7 +110,6 @@ public class Drop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ID
 	{
 		if (oldCodeList != null)
 		{
-			Debug.Log("Old CodeList Script Found");
 			oldCodeList.RemoveBlock(draggedObject);
 		}
 	}

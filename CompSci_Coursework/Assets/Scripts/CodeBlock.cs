@@ -46,23 +46,27 @@ public class CodeBlock : MonoBehaviour {
 			case CodeBlockType.VariableSet:
 				codeBlock = new VariableSet();
 				break;
+
+			case CodeBlockType.Output:
+				codeBlock = new OutputBlock();
+				break;
 		}
 	}
 
 	public CodeFunction GetCodeFunction()
 	{
 		// Before The code block is returned it is checked to make sure all parameters are correct
-		if(inputField1 != null || inputField1.GetComponent<TMP_InputField>() != null)
+		if(inputField1 != null && inputField1.GetComponent<TMP_InputField>() != null)
 		{
 			setParam(1, inputField1.GetComponent<TMP_InputField>().text);
 		}
-		if (inputField2 != null || inputField1.GetComponent<TMP_InputField>() != null)
+		if (inputField2 != null && inputField1.GetComponent<TMP_InputField>() != null)
 		{
-			setParam(2, inputField1.GetComponent<TMP_InputField>().text);
+			setParam(2, inputField2.GetComponent<TMP_InputField>().text);
 		}
-		if (inputField3 != null || inputField1.GetComponent<TMP_InputField>() != null)
+		if (inputField3 != null && inputField1.GetComponent<TMP_InputField>() != null)
 		{
-			setParam(3, inputField1.GetComponent<TMP_InputField>().text);
+			setParam(3, inputField3.GetComponent<TMP_InputField>().text);
 		}
 
 		//Sets the params in the object
@@ -74,25 +78,33 @@ public class CodeBlock : MonoBehaviour {
 	public void setParam(int paramNumber, string paramData)
 	{
 		Variable tempParam;
-
+		
 		//Use of Try Catch for defensive programming
 		try
 		{
 			tempParam = new Variable(int.Parse(paramData));
+	
 		}
 		catch
 		{
+	
+			
+			//If there is a variable without the name
+			if(PlaySessionManager.ins.variableList.Where(v => v.GetName() == paramData.ToLower()).Count() == 0)
+			{
+				//Create a new variable with said name
+				PlaySessionManager.ins.variableList
+					.Add(new Variable(paramData, -1));
+			}
+			//Get a set the value and name from the variable with the name in the list
 			//use of Lambda Expresion
 			tempParam = PlaySessionManager.ins.variableList
 				.Where(v => v.GetName() == paramData.ToLower()).FirstOrDefault();
-
-			if(tempParam == null)
-			{
-				PlaySessionManager.ins.variableList
-					.Add(new Variable(paramData, PlaySessionManager.ins.variableList.Count));
-			}
+			//Set the index of the parameter to that of the index of the variable in the variable list
+			tempParam = new Variable(paramData, PlaySessionManager.ins.variableList.IndexOf(tempParam), tempParam.GetValue());
+			Debug.Log(tempParam.GetName());
 		}
-		
+		Debug.Log(tempParam.GetValue().ToString());
 
 		switch (paramNumber)
 		{

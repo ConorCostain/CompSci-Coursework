@@ -5,5 +5,7 @@ public class Add :OperatorCodeBlock{
 	{
 		//Use of Anonymous function and Delegates
 		SetVariable(param1, param2, param3, new OperatorFunction((x, y) => x + y));
+
 	}
+
 }

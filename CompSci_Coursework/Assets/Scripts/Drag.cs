@@ -12,18 +12,15 @@ public class Drag : MonoBehaviour,IBeginDragHandler, IDragHandler ,IEndDragHandl
 
 		if (gameObject.tag == "CodeBlock" || gameObject.tag == "StartBlock")
 		{
-			Debug.Log("Drag Started");
 			draggedObject = gameObject;
 
 			//If the block comes from the roster create a duplicate
 			if (transform.parent.GetComponent<Drop>() != null)  //Prevents crashing from no drop script
 			{
-				Debug.Log("Parent has a drop script");
 				// If the block is from a roster then it creates a duplicate instead of dragging the
 				// original object
 				if (transform.parent.GetComponent<Drop>().zoneType == Drop.DropZoneType.Roster)
 				{
-					Debug.Log("Roster duplicate created");
 					draggedObject = Instantiate(gameObject, GetCanvas(transform));
 				}
 			}
@@ -48,7 +45,6 @@ public class Drag : MonoBehaviour,IBeginDragHandler, IDragHandler ,IEndDragHandl
 	// Method called after the drag has ended and after the OnDrop Method in the Drop Script
 	public void OnEndDrag(PointerEventData eventdata)
 	{
-		Debug.Log("Drag Ended");
 		if (gameObject.tag == "CodeBlock" || gameObject.tag == "StartBlock")
 		{
 			draggedObject.GetComponent<CanvasGroup>().blocksRaycasts = true; 
@@ -62,7 +58,6 @@ public class Drag : MonoBehaviour,IBeginDragHandler, IDragHandler ,IEndDragHandl
 	//sets all the raycasts of the children to the desired value
 	private void setChildrenRayCasts(GameObject parent, bool raycastValue)
 	{
-		Debug.Log("Child raycastst set to " + (raycastValue ? "true" : "false"));
 		CanvasGroup canvasGroupScript;
 		for (int i = 0; i < parent.transform.childCount; i++)
 		{

@@ -19,7 +19,7 @@ public class Variable{
 	{
 		this.value = value;
 		this.name = name;
-		if (index >= -1 && index < PlaySessionManager.ins.variableList.Count)
+		if (index >= -1 && index <= PlaySessionManager.ins.variableList.Count)
 		{
 			this.index = index;
 		}
