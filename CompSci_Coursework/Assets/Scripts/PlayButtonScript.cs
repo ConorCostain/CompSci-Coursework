@@ -7,20 +7,11 @@ public class PlayButtonScript : MonoBehaviour {
 
 	public static void OnClick()
 	{
-		GameObject canvas = GetCanvas();
-		canvas.GetComponentsInChildren<StartBlock>().ForEach(b => b.StartInterpreter());
+		Debug.Log("OnClick called");
+		GameObject.FindGameObjectsWithTag("CodeBlock").Where(b => b.GetComponent<StartBlock>() != null)
+			.ToList().ForEach(b => b.GetComponent<StartBlock>().StartInterpreter());
 	}
 
-	public GameObject GetCanvas(Transform trans = transform)
-	{
-		if(trans.gameObject.tag == "Canvas")
-		{
-			return trans;
-		}
-		else
-		{
-			return GetCanvas(trans.parent);
-		}
-	}
+	
 
 }

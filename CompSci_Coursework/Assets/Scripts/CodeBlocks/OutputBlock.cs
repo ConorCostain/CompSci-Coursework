@@ -7,7 +7,6 @@ public class OutputBlock : BaseCodeBlock {
 
 	public override void CodeBlockFunction()
 	{
-		Debug.Log(param1.GetName() + " = " + param1.GetValue());
-		
+		PlaySessionManager.ins.Output(param1);
 	}
 }

@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class StartBlock : MonoBehaviour {
 
+
 	public void StartInterpreter()
 	{
-
+		CodeList codeListScript = transform.parent.gameObject.GetComponent<CodeList>();
+		if (codeListScript != false)
+		{
+			PlaySessionManager.ins.CodeInterpreter(codeListScript.codeList);
+		}
 	}
 }
