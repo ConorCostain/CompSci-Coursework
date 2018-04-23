@@ -24,6 +24,7 @@ public class CodeBlock : MonoBehaviour {
 
 	public void Start()
 	{
+		
 		switch (blockType)
 		{
 			case CodeBlockType.Add:
