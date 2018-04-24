@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 using TMPro;
 
@@ -99,8 +97,7 @@ public class CodeBlock : MonoBehaviour {
 			}
 			//Get a set the value and name from the variable with the name in the list
 			//use of Lambda Expresion
-			tempParam = PlaySessionManager.ins.variableList
-				.Where(v => v.GetName() == paramData).FirstOrDefault();
+			tempParam = PlaySessionManager.ins.variableList.Where(v => v.GetName() == paramData).FirstOrDefault();
 			//Set the index of the parameter to that of the index of the variable in the variable list
 			tempParam = new Variable(paramData, PlaySessionManager.ins.variableList.IndexOf(tempParam), tempParam.GetValue());
 			

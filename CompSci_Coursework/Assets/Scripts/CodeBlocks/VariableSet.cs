@@ -14,10 +14,10 @@ public class VariableSet : BaseCodeBlock {
 	{
 		if(var1 != null && var2 != null)
 			var1.SetValue(var2.GetValue());
-		if(var1 == null )
-			Debug.Log("var1 null");
-		if (var2 == null)
-			Debug.Log("var2 null");
+		else
+		{
+			Debug.Log("One of the values is null for SetVariable()");
+		}
 	}		
 
 	
