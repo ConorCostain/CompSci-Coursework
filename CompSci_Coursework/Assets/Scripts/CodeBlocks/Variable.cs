@@ -77,7 +77,7 @@ public class Variable{
 		}
 	}
 
-	//Use of Operator Overloading
+	//Use of Operator Overloading For Mathematical Functions
 	public static Variable operator +(Variable var1, Variable var2)
 	{
 		return new Variable(var1.GetValue() + var2.GetValue());
@@ -96,6 +96,37 @@ public class Variable{
 	public static Variable operator *(Variable var1, Variable var2)
 	{
 		return new Variable(var1.GetValue() * var2.GetValue());
+	}
+
+	//Use of Operator Overloading for Logical Functions
+	public static bool operator ==(Variable var1, Variable var2)
+	{
+		return (var1.GetValue() == var2.GetValue());
+	}
+
+	public static bool operator !=(Variable var1, Variable var2)
+	{
+		return !var1.Equals(null);
+	}
+
+	public static bool operator>(Variable var1, Variable var2)
+	{
+		return (var1.GetValue() > var2.GetValue());
+	}
+
+	public static bool operator <(Variable var1, Variable var2)
+	{
+		return (var1.GetValue() < var2.GetValue());
+	}
+
+	public static bool operator >=(Variable var1, Variable var2)
+	{
+		return (var1.GetValue() >= var2.GetValue());
+	}
+
+	public static bool operator <=(Variable var1, Variable var2)
+	{
+		return (var1.GetValue() <= var2.GetValue());
 	}
 
 }

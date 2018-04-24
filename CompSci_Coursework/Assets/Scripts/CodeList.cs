@@ -22,9 +22,24 @@ public class CodeList : MonoBehaviour
 			handleBlock = Instantiate(handlePrefab, transform);
 			handleBlock.transform.SetAsFirstSibling();
 		}
+
 		if (paddingPrefab != null)
 		{
 			paddingBlock = Instantiate(paddingPrefab, transform);
+		}
+		//If there is no padding block prefab then check through the children to see if there is one
+		//if so enable the block
+		else 
+		{
+			for (int i = 0; i < transform.childCount; i++)
+			{
+				if(transform.GetChild(i).name == "PaddingBlock")
+				{
+					paddingBlock = transform.GetChild(i).gameObject;
+					paddingBlock.SetActive(true);
+					break; //breaks from loop to prevent wasting time when a padding block has already been found
+				}
+			}
 		}
 	}
 

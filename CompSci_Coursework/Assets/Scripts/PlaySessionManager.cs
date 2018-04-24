@@ -81,6 +81,7 @@ public class PlaySessionManager : MonoBehaviour {
 		}
 		else
 		{
+			Debug.Log("Code Interpreter ran without input");
 			ExecuteCodeList(codeList);
 		}
 	}
