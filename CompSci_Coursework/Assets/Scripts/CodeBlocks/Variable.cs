@@ -9,7 +9,7 @@ public class Variable{
 
 	private int index = -1;
 
-	public Variable(int value)
+	public Variable(int value = 0)
 	{
 		this.value = value;
 	}

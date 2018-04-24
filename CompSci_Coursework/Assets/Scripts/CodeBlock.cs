@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -13,10 +14,6 @@ public class CodeBlock : MonoBehaviour {
 
 	private delegate BaseCodeBlock ConditionalBlockSetup();
 	private ConditionalBlockSetup condBlockSetup;
-
-	public Variable param1;
-	public Variable param2;
-	public Variable param3;
 
 	public GameObject inputField1;
 	public GameObject inputField2;
@@ -76,31 +73,50 @@ public class CodeBlock : MonoBehaviour {
 
 	public CodeFunction GetCodeFunction()
 	{
+
+		Queue<Variable> parameters = VariableSetup();
+
+		//Sets the params in the object
+		codeBlock.SetParams(parameters.Dequeue(), parameters.Dequeue(), parameters.Dequeue());
+
+		return new CodeFunction(codeBlock.CodeBlockFunction);
+	}
+
+	private Queue<Variable> VariableSetup()
+	{
+		Queue<Variable> varQueue = new Queue<Variable>();
+		//Sets to blank variable incase they are somehow not set as one from getVariable
+		Variable param1 = new Variable();
+		Variable param2 = new Variable();
+		Variable param3 = new Variable();
+
 		// Before The code block is returned it is checked to make sure all parameters are correct
-		if(inputField1 != null && inputField1.GetComponent<TMP_InputField>() != null)
+		if (inputField1 != null && inputField1.GetComponent<TMP_InputField>() != null)
 		{
-			setParam(1, inputField1.GetComponent<TMP_InputField>().text);
+			varQueue.Enqueue (getVariable(1, inputField1.GetComponent<TMP_InputField>().text));
 		}
 		if (inputField2 != null && inputField1.GetComponent<TMP_InputField>() != null)
 		{
-			setParam(2, inputField2.GetComponent<TMP_InputField>().text);
+			varQueue.Enqueue(getVariable(2, inputField2.GetComponent<TMP_InputField>().text));
 		}
 		if (useComparitor)
 		{
 			codeBlock = condBlockSetup.Invoke();
 		}
-		else if(inputField3 != null && inputField1.GetComponent<TMP_InputField>() != null)
+		else if (inputField3 != null && inputField1.GetComponent<TMP_InputField>() != null)
 		{
-			setParam(3, inputField3.GetComponent<TMP_InputField>().text);
+			varQueue.Enqueue(getVariable(3, inputField3.GetComponent<TMP_InputField>().text));
 		}
 
-		//Sets the params in the object
-		codeBlock.SetParams(param1, param2, param3);
-
-		return new CodeFunction(codeBlock.CodeBlockFunction);
+		while(varQueue.Count < 3)
+		{
+			//If the varQueue doesnt have 3 it fills the rest with blank Variables
+			varQueue.Enqueue(new Variable());
+		}
+		return varQueue;
 	}
 
-	public void setParam(int paramNumber, string paramData)
+	public Variable getVariable(int paramNumber, string paramData)
 	{
 		Variable tempParam;
 		paramData = paramData.ToLower();
@@ -129,22 +145,9 @@ public class CodeBlock : MonoBehaviour {
 			tempParam = new Variable(paramData, PlaySessionManager.ins.variableList.IndexOf(tempParam), tempParam.GetValue());
 			
 		}
-		
 
-		switch (paramNumber)
-		{
-			case 1:
-				param1 = tempParam;
-					break;
-			case 2:
-				param2 = tempParam;
-				break;
 
-			case 3:
-				param3 = tempParam;
-				break;
-
-		}
+		return tempParam;
 	}
 
 }
