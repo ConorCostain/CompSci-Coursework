@@ -132,7 +132,7 @@ public class PlaySessionManager : MonoBehaviour {
 	private void WinCheck(Queue<GameObject> codeList)
 	{
 		
-		if(outputList.All(o => expectedOutputs.All(e => o == e)))
+		if(ListCompare(outputList, expectedOutputs))
 		{
 			int blocksUsed = CodeBlockCount(codeList);
 			
@@ -150,6 +150,19 @@ public class PlaySessionManager : MonoBehaviour {
 			//Wipes variable list so that all variables are defined in the code list rather than left over
 			variableList = new List<Variable>();
 		}
+	}
+
+	private bool ListCompare(List<int> list1, List<int> list2)
+	{
+		if (list1.Count != list2.Count)
+			return false;
+
+		for (int i = 0; i < list1.Count; i++)
+		{
+			if (list1[i] != list2[i])
+				return false;
+		}
+		return true;
 	}
 
 	private int CodeBlockCount(Queue<GameObject> codeList)
