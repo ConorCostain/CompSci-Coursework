@@ -1,1 +1,2 @@
 # CompSci-Coursework
+This Project is my Coursework for my AQA A2 Computer Science, The project aims to help beginners learn the basic mindset and fundamentals of coding without the need for the knowledge of syntax or any other prior knowledge, and also to tech the user in a game-like format to make it more enjoyable and rewarding, treating problems as levels to a game with a score based on the usage of the Code Blocks.
