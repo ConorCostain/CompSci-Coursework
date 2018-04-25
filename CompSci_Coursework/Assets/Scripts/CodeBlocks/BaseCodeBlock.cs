@@ -15,11 +15,11 @@ public abstract class BaseCodeBlock{
 	public abstract void CodeBlockFunction();
 
 	//still takes three parameters so all codeblocks can be sent all three and the uneeded ones will be ignored
-	public void SetParams(Variable param1, Variable param2, Variable param3)
+	public void SetParams(Queue<Variable> parameters)
 	{
-		this.param1 = param1;
-		this.param2 = param2;
-		this.param3 = param3;
+		this.param1 = parameters.Dequeue();
+		this.param2 = parameters.Dequeue();
+		this.param3 = parameters.Dequeue();
 	}
 
 

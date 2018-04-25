@@ -73,11 +73,10 @@ public class CodeBlock : MonoBehaviour {
 
 	public CodeFunction GetCodeFunction()
 	{
-
 		Queue<Variable> parameters = VariableSetup();
 
 		//Sets the params in the object
-		codeBlock.SetParams(parameters.Dequeue(), parameters.Dequeue(), parameters.Dequeue());
+		codeBlock.SetParams(parameters);
 
 		return new CodeFunction(codeBlock.CodeBlockFunction);
 	}
