@@ -1,21 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuScript : MonoBehaviour {
 
-	public void PlayButton()
+	public Button playButton;
+	public Button quitButton;
+
+	public void Awake()
 	{
-		Debug.Log("Play Button Pressed");
+		if(playButton != null)
+		{
+			playButton.onClick.AddListener(() => PlaySessionManager.ins.LoadScene("SceneSelect") );
+		}
+		if (quitButton != null)
+		{
+			quitButton.onClick.AddListener(() => Application.Quit() );
+		}
+
 	}
 
-	public void LevelsButton()
-	{
-		Debug.Log("Levels Button Pressed");
-	}
-
-	public void Quit()
-	{
-		Application.Quit();
-	}
+	
 }
