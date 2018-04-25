@@ -8,6 +8,7 @@ public class ObjectiveManager : MonoBehaviour {
 	//In the Unity editor the User can enter the desired Inputs and expected outputs and enter instructions for the user
 	public List<int> inputList = new List<int>();
 	public List<int> expectedOutputs = new List<int>();
+	public int minBlocks;
 	public string instructions;
 
 	//These Booleans decide whether to display these lists on the screen for the user
@@ -20,6 +21,10 @@ public class ObjectiveManager : MonoBehaviour {
 	public TMP_Text inputText;
 	public TMP_Text expOutputText;
 	public TMP_Text outputText;
+	public GameObject winPopup;
+	public TMP_Text scoreText;
+	public TMP_Text highScoreText;
+	public TMP_Text blocksUsedText;
 
 	//Runs when level opens
 	public void Start()
@@ -89,6 +94,22 @@ public class ObjectiveManager : MonoBehaviour {
 	public void AddToTMP<T>(TMP_Text text, T element)
 	{
 		text.SetText(text.text + " " + element.ToString() + ",");
+	}
+
+	public void WinFunc(int blocksUsed = 1)
+	{
+		
+		winPopup.SetActive(true);
+		try
+		{
+			//If already last sibling will throw an exception so this catches that
+			winPopup.transform.SetAsLastSibling();
+		}
+		catch {}
+		blocksUsedText.text = "Blocks Used : " + blocksUsed.ToString();
+		//Cast into floats and back into integers as otherwise the decimal values when divded were set to 0 and lost
+		int score = (int)(((float)minBlocks / (float)blocksUsed) * 100);
+		scoreText.text = "Score :" + score.ToString();
 	}
 
 }

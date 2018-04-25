@@ -9,12 +9,12 @@ public class PlaySessionManager : MonoBehaviour {
 
 	//Declaration of Lists and Variables
 
+	public List<Variable> variableList = new List<Variable>();
 	private List<int> inputList = new List<int>();
 	private List<int> expectedOutputs = new List<int>();
 	private List<int> outputList = new List<int>();
 	private ObjectiveManager objManager;
 	private TMP_Text outputText;
-	public List<Variable> variableList = new List<Variable>();
 	
 	//One method for the Objective manager to call to pass through the required values
 	public void ObjectivesSetup(List<int> inputList, List<int> expectedOutputs,ObjectiveManager objManager, TMP_Text outputText)
@@ -34,7 +34,7 @@ public class PlaySessionManager : MonoBehaviour {
 		{
 			objManager.AddToTMP<int>(outputText, output.GetValue());
 		}
-		WinCheck();
+		
 	}
 
 	// General Setup of PlaySessionManager
@@ -58,19 +58,6 @@ public class PlaySessionManager : MonoBehaviour {
 		
 	}
 
-	public static void StartButton()
-	{
-		Debug.Log("OnClick called");
-		GameObject.FindGameObjectsWithTag("CodeBlock").Where(b => b.GetComponent<StartBlock>() != null)
-			.ToList().ForEach(b => b.GetComponent<StartBlock>().StartInterpreter());
-	}
-
-	
-	private void WinCheck()
-	{
-
-	}
-
 	//The main function which takes in a CodeList and Runs the code functions of it
 	public void CodeInterpreter(Queue<GameObject> codeList, bool useInput = true)
 	{
@@ -88,6 +75,11 @@ public class PlaySessionManager : MonoBehaviour {
 		{
 			Debug.Log("Code Interpreter ran without input");
 			ExecuteCodeList(codeList);
+		}
+
+		if(useInput)
+		{
+			WinCheck(codeList);
 		}
 	}
 
@@ -130,6 +122,70 @@ public class PlaySessionManager : MonoBehaviour {
 				tempScript.GetCodeFunction().Invoke();
 			}
 		}
+	}
+
+	private void WinCheck(Queue<GameObject> codeList)
+	{
+		Debug.Log("WinCheck called");
+		if(outputList.All(o => expectedOutputs.All(e => o == e)))
+		{
+			Debug.Log("playSession Wincheck true");
+			//Insert Win Operations here
+			int blocksUsed = CodeBlockCount(codeList);
+			
+			objManager.WinFunc(blocksUsed);
+		}
+		else
+		{
+			Debug.Log("expOutput:");
+			expectedOutputs.ForEach(i => Debug.Log(i.ToString()));
+			Debug.Log("Output:");
+			outputList.ForEach(i => Debug.Log(i.ToString()));
+			// If outputs are not correct, then reset for next run
+			outputList = new List<int>();
+			//Wipes variable list so that all variables are defined in the code list rather than left over
+			variableList = new List<Variable>();
+		}
+	}
+
+	private int CodeBlockCount(Queue<GameObject> codeList)
+	{
+		int blockCount = 0;
+
+		List<CodeBlock> codeBlockList = new List<CodeBlock>();
+		codeList.ToList().ForEach(g => codeBlockList.Add(g.GetComponent<CodeBlock>()));
+
+		foreach(CodeBlock codeBlock in codeBlockList)
+		{
+			if (codeBlock != null)
+			{
+				blockCount++;
+				if (codeBlock.blockType == CodeBlock.CodeBlockType.If || codeBlock.blockType == CodeBlock.CodeBlockType.While)
+				{
+					blockCount += CodeBlockCount(codeBlock.gameObject.GetComponent<CodeList>().codeList);
+				} 
+			}
+		}
+
+		return blockCount;
+	}
+
+	public void LoadScene(string sceneName)
+	{
+		ResetProperties();
+		SceneManager.LoadScene(sceneName);
+	}
+
+	private void ResetProperties()
+	{
+		//Resets the properties of the object before a new scene so that there are no references to old objects
+		variableList = new List<Variable>();
+		inputList = new List<int>();
+		expectedOutputs = new List<int>();
+		outputList = new List<int>();
+		objManager = null;
+		outputText = null;
+		
 	}
 
 }

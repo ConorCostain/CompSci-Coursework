@@ -84,10 +84,6 @@ public class CodeBlock : MonoBehaviour {
 	private Queue<Variable> VariableSetup()
 	{
 		Queue<Variable> varQueue = new Queue<Variable>();
-		//Sets to blank variable incase they are somehow not set as one from getVariable
-		Variable param1 = new Variable();
-		Variable param2 = new Variable();
-		Variable param3 = new Variable();
 
 		// Before The code block is returned it is checked to make sure all parameters are correct
 		if (inputField1 != null && inputField1.GetComponent<TMP_InputField>() != null)
