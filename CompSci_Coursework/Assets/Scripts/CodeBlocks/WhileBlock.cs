@@ -14,7 +14,7 @@ public class WhileBlock : ConditionalCodeBlock
 		//Gets the comparison function and invokes it using the params
 		Comparison comparison = getComparison();
 		//Countdown prevents the user getting stuck in an infinite loop and exits after 100 repeats
-		int countdown = 100;
+		int countdown = 30;
 		while (comparison(param1, param2) && countdown > 0)
 		{
 			Debug.Log("Condition true");

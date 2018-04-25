@@ -21,7 +21,7 @@ public class WinPopupButtonManager : MonoBehaviour {
 		if (mainMenuButton != null)
 		{
 			//Adding an event listener using an Anymous method to create the method inline
-			tryAgainButton.onClick.AddListener(() =>
+			mainMenuButton.onClick.AddListener(() =>
 			   PlaySessionManager.ins.LoadScene("MainMenu"));
 		}
 	}

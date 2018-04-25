@@ -15,6 +15,7 @@ public class PlaySessionManager : MonoBehaviour {
 	private List<int> outputList = new List<int>();
 	private ObjectiveManager objManager;
 	private TMP_Text outputText;
+	private bool clearOutputs = false;
 	
 	//One method for the Objective manager to call to pass through the required values
 	public void ObjectivesSetup(List<int> inputList, List<int> expectedOutputs,ObjectiveManager objManager, TMP_Text outputText)
@@ -28,7 +29,11 @@ public class PlaySessionManager : MonoBehaviour {
 	//Adds the value to the List and also adds it to the linked UI element to display the output to the user
 	public void Output(Variable output)
 	{
-		Debug.Log("Output: " + output.GetValue().ToString());
+		if (clearOutputs)
+		{
+			outputText.text = "Outputs:";
+			clearOutputs = false;
+		}
 		outputList.Add(output.GetValue());
 		if(objManager != null && outputText != null)
 		{
@@ -126,11 +131,9 @@ public class PlaySessionManager : MonoBehaviour {
 
 	private void WinCheck(Queue<GameObject> codeList)
 	{
-		Debug.Log("WinCheck called");
+		
 		if(outputList.All(o => expectedOutputs.All(e => o == e)))
 		{
-			Debug.Log("playSession Wincheck true");
-			//Insert Win Operations here
 			int blocksUsed = CodeBlockCount(codeList);
 			
 			objManager.WinFunc(blocksUsed);
@@ -143,6 +146,7 @@ public class PlaySessionManager : MonoBehaviour {
 			outputList.ForEach(i => Debug.Log(i.ToString()));
 			// If outputs are not correct, then reset for next run
 			outputList = new List<int>();
+			clearOutputs = true;
 			//Wipes variable list so that all variables are defined in the code list rather than left over
 			variableList = new List<Variable>();
 		}

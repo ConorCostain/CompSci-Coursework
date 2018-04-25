@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
+using System.IO;
 
 public class ObjectiveManager : MonoBehaviour {
 
@@ -83,6 +85,19 @@ public class ObjectiveManager : MonoBehaviour {
 
 	}
 
+	public void setInstruction(string instruction = "")
+	{
+		if(instruction == "")
+		{
+			instruction = instructions;
+		}
+
+		if (instructionText != null)
+		{
+			instructionText.text = instruction; 
+		}
+	}
+
 	public void AddToTMP<T>(TMP_Text text, List<T> list)
 	{
 		foreach(T element in list)
@@ -110,6 +125,47 @@ public class ObjectiveManager : MonoBehaviour {
 		//Cast into floats and back into integers as otherwise the decimal values when divded were set to 0 and lost
 		int score = (int)(((float)minBlocks / (float)blocksUsed) * 100);
 		scoreText.text = "Score :" + score.ToString();
+		int highScore = getHighScore(SceneManager.GetActiveScene().name, score);
+		highScoreText.text = "High Score : " + highScore.ToString();
 	}
 
+	public int getHighScore(string levelName, int score = 0)
+	{
+		string highScoreFile;
+		int highScore = 0;
+		//checks to prevent trying to read a file that does not exist
+		if (System.IO.File.Exists(levelName + ".txt"))
+		{
+			//use of file reading
+			using (StreamReader reader = new StreamReader(levelName + ".txt"))
+			{
+				highScoreFile = reader.ReadLine();
+			}
+			
+
+			//Use of Try Catch in case the 
+			try
+			{
+				highScore = int.Parse(highScoreFile);
+			}
+			catch { } 
+		}
+		if(score > highScore)
+		{
+			highScore = score;
+			SetHighScore(highScore, levelName);
+		}
+
+		return highScore;
+	}
+
+	private void SetHighScore(int highScore, string levelName)
+	{
+		//use of writing to files
+		using (StreamWriter writer = new StreamWriter(levelName + ".txt"))
+		{
+			writer.Write(highScore);
+		}
+	}
 }
+
