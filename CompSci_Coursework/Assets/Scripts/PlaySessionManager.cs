@@ -34,6 +34,7 @@ public class PlaySessionManager : MonoBehaviour {
 		{
 			objManager.AddToTMP<int>(outputText, output.GetValue());
 		}
+		WinCheck();
 	}
 
 	// General Setup of PlaySessionManager
@@ -65,6 +66,10 @@ public class PlaySessionManager : MonoBehaviour {
 	}
 
 	
+	private void WinCheck()
+	{
+
+	}
 
 	//The main function which takes in a CodeList and Runs the code functions of it
 	public void CodeInterpreter(Queue<GameObject> codeList, bool useInput = true)
