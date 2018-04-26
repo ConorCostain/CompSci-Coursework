@@ -5,26 +5,29 @@ using TMPro;
 
 public class CodeBlock : MonoBehaviour {
 
+	//Enumerator to Decide the type of code block this object will be ( Set in Unity Editor)
 	public enum CodeBlockType {Add, Subtract, Multiply, Divide, VariableSet, If, While, Output}
 	public CodeBlockType blockType;
 
-	private bool useComparitor = false;
-
+	//The The CodeFunction delegate passed through to the Code Interpreter
 	public delegate void CodeFunction();
 
+	//Used to Instantiate the derived classes from CondtionalCodeBlock at a later time than when the other code blocks are instantiated
 	private delegate BaseCodeBlock ConditionalBlockSetup();
 	private ConditionalBlockSetup condBlockSetup;
 
+	//References to the Input Fields, defined in Unity Editor
 	public GameObject inputField1;
 	public GameObject inputField2;
 	public GameObject inputField3;
 
+	//The main object of the script containing the code block function that is executed by the code interpreter
 	private BaseCodeBlock codeBlock = null;
 
-
+	//Start method called when level starts
 	public void Start()
 	{
-		
+		// Instantiates a code block relative to the block type
 		switch (blockType)
 		{
 			case CodeBlockType.Add:
@@ -58,7 +61,6 @@ public class CodeBlock : MonoBehaviour {
 				{
 					return new IfBlock(gameObject, inputField3.GetComponent<TMP_InputField>().text);
 				};
-				useComparitor = true;
 				break;
 			case CodeBlockType.While:
 				
@@ -66,13 +68,14 @@ public class CodeBlock : MonoBehaviour {
 				{
 					return new WhileBlock(gameObject, inputField3.GetComponent<TMP_InputField>().text);
 				};
-				useComparitor = true;
 				break;
 		}
 	}
 
+	//gets the code block function and returns it to the Code Interpreter
 	public CodeFunction GetCodeFunction()
 	{
+		//Gets the Variables after they have been parsed from text to Variables and added to a queue
 		Queue<Variable> parameters = VariableSetup();
 
 		//Sets the params in the object
@@ -81,6 +84,7 @@ public class CodeBlock : MonoBehaviour {
 		return new CodeFunction(codeBlock.CodeBlockFunction);
 	}
 
+	//Enqueues the Variables once parsed
 	private Queue<Variable> VariableSetup()
 	{
 		Queue<Variable> varQueue = new Queue<Variable>();
@@ -88,19 +92,19 @@ public class CodeBlock : MonoBehaviour {
 		// Before The code block is returned it is checked to make sure all parameters are correct
 		if (inputField1 != null && inputField1.GetComponent<TMP_InputField>() != null)
 		{
-			varQueue.Enqueue (getVariable(1, inputField1.GetComponent<TMP_InputField>().text));
+			varQueue.Enqueue (GetVariable(inputField1.GetComponent<TMP_InputField>().text));
 		}
 		if (inputField2 != null && inputField1.GetComponent<TMP_InputField>() != null)
 		{
-			varQueue.Enqueue(getVariable(2, inputField2.GetComponent<TMP_InputField>().text));
+			varQueue.Enqueue(GetVariable(inputField2.GetComponent<TMP_InputField>().text));
 		}
-		if (useComparitor)
+		if (condBlockSetup != null)
 		{
 			codeBlock = condBlockSetup.Invoke();
 		}
 		else if (inputField3 != null && inputField1.GetComponent<TMP_InputField>() != null)
 		{
-			varQueue.Enqueue(getVariable(3, inputField3.GetComponent<TMP_InputField>().text));
+			varQueue.Enqueue(GetVariable(inputField3.GetComponent<TMP_InputField>().text));
 		}
 
 		while(varQueue.Count < 3)
@@ -111,7 +115,8 @@ public class CodeBlock : MonoBehaviour {
 		return varQueue;
 	}
 
-	public Variable getVariable(int paramNumber, string paramData)
+	//Parses the variable from a string to a Variable Object
+	private Variable GetVariable(string paramData)
 	{
 		Variable tempParam;
 		paramData = paramData.ToLower();
@@ -119,13 +124,12 @@ public class CodeBlock : MonoBehaviour {
 		//Use of Try Catch for defensive programming
 		try
 		{
+			//If the string can be parsed to an Int Instantiated a Variable with the value of said Int
 			tempParam = new Variable(int.Parse(paramData));
 	
 		}
 		catch
 		{
-	
-			
 			//If there is a variable without the name
 			if(PlaySessionManager.ins.variableList.Where(v => v.GetName() == paramData).Count() == 0)
 			{

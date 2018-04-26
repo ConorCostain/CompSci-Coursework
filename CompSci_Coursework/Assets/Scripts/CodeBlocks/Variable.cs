@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Variable{
 
-	protected int value;
+	private int value;
 
 	private string name;
 
@@ -50,7 +50,10 @@ public class Variable{
 	{
 		if(index != -1)
 		{
-			value = PlaySessionManager.ins.variableList[index].GetValue();
+			if (index < PlaySessionManager.ins.variableList.Count)
+			{
+				value = PlaySessionManager.ins.variableList[index].GetValue(); 
+			}
 		}
 		return value;
 	}
@@ -90,6 +93,10 @@ public class Variable{
 
 	public static Variable operator /(Variable var1, Variable var2)
 	{
+		//Prevents Dividing by 0
+		if (var2.GetValue() == 0)
+			return new Variable(0);
+
 		return new Variable(var1.GetValue() / var2.GetValue());
 	}
 
