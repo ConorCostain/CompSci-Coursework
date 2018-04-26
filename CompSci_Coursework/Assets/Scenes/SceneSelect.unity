@@ -194,11 +194,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1393758678}
     m_Modifications:
-    - target: {fileID: 114374231113923572, guid: f769a5413e72a6f488a2bd8256b4b670,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 224930355153764604, guid: f769a5413e72a6f488a2bd8256b4b670,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -247,7 +242,7 @@ Prefab:
     - target: {fileID: 224930355153764604, guid: f769a5413e72a6f488a2bd8256b4b670,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -150
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 224930355153764604, guid: f769a5413e72a6f488a2bd8256b4b670,
         type: 2}
@@ -267,7 +262,7 @@ Prefab:
     - target: {fileID: 224930355153764604, guid: f769a5413e72a6f488a2bd8256b4b670,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 224930355153764604, guid: f769a5413e72a6f488a2bd8256b4b670,
         type: 2}
@@ -277,7 +272,7 @@ Prefab:
     - target: {fileID: 224930355153764604, guid: f769a5413e72a6f488a2bd8256b4b670,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 224930355153764604, guid: f769a5413e72a6f488a2bd8256b4b670,
         type: 2}
@@ -289,40 +284,25 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114850865709432006, guid: f769a5413e72a6f488a2bd8256b4b670,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114850865709432006, guid: f769a5413e72a6f488a2bd8256b4b670,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 114903480540914734, guid: f769a5413e72a6f488a2bd8256b4b670,
         type: 2}
       propertyPath: m_havePropertiesChanged
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114903480540914734, guid: f769a5413e72a6f488a2bd8256b4b670,
         type: 2}
       propertyPath: m_isInputParsingRequired
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114374231113923572, guid: f769a5413e72a6f488a2bd8256b4b670,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114374231113923572, guid: f769a5413e72a6f488a2bd8256b4b670,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlayButton
-      objectReference: {fileID: 0}
-    - target: {fileID: 114374231113923572, guid: f769a5413e72a6f488a2bd8256b4b670,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114374231113923572, guid: f769a5413e72a6f488a2bd8256b4b670,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 114374231113923572, guid: f769a5413e72a6f488a2bd8256b4b670,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1200671163955008, guid: f769a5413e72a6f488a2bd8256b4b670, type: 2}
       propertyPath: m_IsActive
@@ -698,7 +678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7fab0475e3c1824a845dd8b558128fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPosistion: {x: -300, y: -150}
+  startPosistion: {x: -300, y: 100}
   horizontalSpacing: 150
   verticalSpacing: -100
   levelButton: {fileID: 1200671163955008, guid: f769a5413e72a6f488a2bd8256b4b670,
