@@ -82,7 +82,7 @@ public class CodeList : MonoBehaviour
 	//Removes the block from the queue and if the queue is now empty the code list is destroyed
 	public void RemoveBlock(GameObject block)
 	{
-		codeList = ElementExtractor<GameObject>(codeList, block);
+		codeList = ElementExtractor(codeList, block);
 		Debug.Log("Removing block from code list");
 
 		if (codeList.Count < 1)
@@ -94,24 +94,26 @@ public class CodeList : MonoBehaviour
 	}
 
 	//Removes a element from a queue without altering the order of it
-	private Queue<T> ElementExtractor<T>(Queue<T> queue, T element)
+	private Queue<GameObject> ElementExtractor(Queue<GameObject> queue, GameObject element)
 	{
-		Queue<T> newQueue = new Queue<T>();
-		T temp;
+		Queue<GameObject> newQueue = new Queue<GameObject>();
+		GameObject temp;
 
+		//Runs through every element until fully dequeued
 		while (queue.Count > 0)
 		{
 			temp = queue.Dequeue();
 
 			if (element.Equals(temp))
 			{
+				//If the item is found, enqueue the rest of the queue into the newQueue
 				while (queue.Count > 0)
 				{
 					newQueue.Enqueue(queue.Dequeue());
 				}
 			}
 			else
-			{
+			{	//If the element is not a match then enqueue it to the newQueue
 				newQueue.Enqueue(temp);
 			}
 		}

@@ -35,9 +35,9 @@ public class PlaySessionManager : MonoBehaviour {
 			clearOutputs = false;
 		}
 		outputList.Add(output.GetValue());
-		if(objManager != null && outputText != null)
+		if(outputText != null)
 		{
-			objManager.AddToTMP<int>(outputText, output.GetValue());
+			ObjectiveManager.AddToTMP<int>(outputText, output.GetValue());
 		}
 		
 	}
@@ -63,22 +63,40 @@ public class PlaySessionManager : MonoBehaviour {
 		
 	}
 
+	public void LoadScene(string sceneName)
+	{
+		ResetProperties();
+		SceneManager.LoadScene(sceneName);
+	}
+
+	private void ResetProperties()
+	{
+		//Resets the properties of the object before a new scene so that there are no references to old objects
+		variableList = new List<Variable>();
+		inputList = new List<int>();
+		expectedOutputs = new List<int>();
+		outputList = new List<int>();
+		objManager = null;
+		outputText = null;
+		
+	}
+
 	//The main function which takes in a CodeList and Runs the code functions of it
 	public void CodeInterpreter(Queue<GameObject> codeList, bool useInput = true)
 	{
 		if (useInput && inputList.Count > 0)
 		{
-			int count = 1;
+			
 			foreach (int input in inputList)
 			{
-				Debug.Log("Code Interpreter Run :" + count++);
-				inputVariableSetup(input);
+				
+				InputVariableSetup(input);
 				ExecuteCodeList(codeList);
 			} 
 		}
 		else
 		{
-			Debug.Log("Code Interpreter ran without input");
+			
 			ExecuteCodeList(codeList);
 		}
 
@@ -88,11 +106,11 @@ public class PlaySessionManager : MonoBehaviour {
 		}
 	}
 
-	private void inputVariableSetup(int input)
+	private void InputVariableSetup(int input)
 	{
 		// Checks whether the input variable is in the variable list yet and if not adds it
 			//Use of Lambda Expresion
-		if (!(variableList.Where(v => v.GetName() == "input").Count() > 0))
+		if (variableList.Where(v => v.GetName() == "input").Count() == 0)
 		{
 			variableList.Add(new Variable("input", -1, input));
 		}
@@ -112,7 +130,7 @@ public class PlaySessionManager : MonoBehaviour {
 		CodeBlock tempScript = null;
 		//Code List put into a temp so that when dequeued it does not break the original queue
 		//and then it the process of going through the code list may be repeated if necessary
-		//Creating a deep clone using reflection
+		//Creating a deep clone
 		Queue<GameObject> tempList = new Queue<GameObject>(codeList);
 
 
@@ -187,22 +205,5 @@ public class PlaySessionManager : MonoBehaviour {
 		return blockCount;
 	}
 
-	public void LoadScene(string sceneName)
-	{
-		ResetProperties();
-		SceneManager.LoadScene(sceneName);
-	}
-
-	private void ResetProperties()
-	{
-		//Resets the properties of the object before a new scene so that there are no references to old objects
-		variableList = new List<Variable>();
-		inputList = new List<int>();
-		expectedOutputs = new List<int>();
-		outputList = new List<int>();
-		objManager = null;
-		outputText = null;
-		
-	}
 
 }

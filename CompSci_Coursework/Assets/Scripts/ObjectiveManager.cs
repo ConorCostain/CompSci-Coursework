@@ -98,7 +98,7 @@ public class ObjectiveManager : MonoBehaviour {
 		}
 	}
 
-	public void AddToTMP<T>(TMP_Text text, List<T> list)
+	public static void AddToTMP<T>(TMP_Text text, List<T> list)
 	{
 		foreach(T element in list)
 		{
@@ -106,7 +106,7 @@ public class ObjectiveManager : MonoBehaviour {
 		}
 	}
 
-	public void AddToTMP<T>(TMP_Text text, T element)
+	public static void AddToTMP<T>(TMP_Text text, T element)
 	{
 		text.SetText(text.text + " " + element.ToString() + ",");
 	}
