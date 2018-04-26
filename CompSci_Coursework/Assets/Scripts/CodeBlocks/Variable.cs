@@ -113,7 +113,7 @@ public class Variable{
 
 	public static bool operator !=(Variable var1, Variable var2)
 	{
-		return !var1.Equals(null);
+		return !var1.Equals(var2);
 	}
 
 	public static bool operator>(Variable var1, Variable var2)
