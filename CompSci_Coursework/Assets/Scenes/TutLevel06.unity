@@ -397,11 +397,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -752,11 +752,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -826,12 +826,12 @@ Prefab:
     - target: {fileID: 224492656448569386, guid: d47d0e0405b10dd488f48c0cc093a6d6,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 224492656448569386, guid: d47d0e0405b10dd488f48c0cc093a6d6,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -69.75
       objectReference: {fileID: 0}
     - target: {fileID: 224492656448569386, guid: d47d0e0405b10dd488f48c0cc093a6d6,
         type: 2}
@@ -851,7 +851,7 @@ Prefab:
     - target: {fileID: 224492656448569386, guid: d47d0e0405b10dd488f48c0cc093a6d6,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224492656448569386, guid: d47d0e0405b10dd488f48c0cc093a6d6,
         type: 2}
@@ -861,7 +861,7 @@ Prefab:
     - target: {fileID: 224492656448569386, guid: d47d0e0405b10dd488f48c0cc093a6d6,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224492656448569386, guid: d47d0e0405b10dd488f48c0cc093a6d6,
         type: 2}
@@ -1147,7 +1147,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: "IF (you could do that) then\n I would = impressed!"
+  m_text: "IF (you could do that) then\n I would = impressed!\n*Hint You can also
+    use >, >= , <, <="
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 88d8b733ce1582f4582469ec032fe6b3, type: 2}
   m_sharedMaterial: {fileID: 21579337929029734, guid: 88d8b733ce1582f4582469ec032fe6b3,
@@ -1175,10 +1176,10 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 96.22
+  m_fontSize: 68.1
   m_fontSizeBase: 96.22
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
@@ -1215,19 +1216,19 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: -146.63744}
   m_textInfo:
     textComponent: {fileID: 459738521}
-    characterCount: 49
+    characterCount: 86
     spriteCount: 0
-    spaceCount: 10
-    wordCount: 9
+    spaceCount: 20
+    wordCount: 14
     linkCount: 0
-    lineCount: 2
+    lineCount: 3
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -1435,12 +1436,12 @@ Prefab:
     - target: {fileID: 224364277329685480, guid: 20ab7715e83e8e14baf08cb2b8042eb3,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 224364277329685480, guid: 20ab7715e83e8e14baf08cb2b8042eb3,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -184.25
       objectReference: {fileID: 0}
     - target: {fileID: 224364277329685480, guid: 20ab7715e83e8e14baf08cb2b8042eb3,
         type: 2}
@@ -1460,7 +1461,7 @@ Prefab:
     - target: {fileID: 224364277329685480, guid: 20ab7715e83e8e14baf08cb2b8042eb3,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224364277329685480, guid: 20ab7715e83e8e14baf08cb2b8042eb3,
         type: 2}
@@ -1470,7 +1471,7 @@ Prefab:
     - target: {fileID: 224364277329685480, guid: 20ab7715e83e8e14baf08cb2b8042eb3,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224364277329685480, guid: 20ab7715e83e8e14baf08cb2b8042eb3,
         type: 2}
@@ -2079,11 +2080,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -2476,11 +2477,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -2550,12 +2551,12 @@ Prefab:
     - target: {fileID: 224751520237086426, guid: 82a976daaf5a1fb4e855d5c70df17171,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 224751520237086426, guid: 82a976daaf5a1fb4e855d5c70df17171,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -298.75
       objectReference: {fileID: 0}
     - target: {fileID: 224751520237086426, guid: 82a976daaf5a1fb4e855d5c70df17171,
         type: 2}
@@ -2575,7 +2576,7 @@ Prefab:
     - target: {fileID: 224751520237086426, guid: 82a976daaf5a1fb4e855d5c70df17171,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224751520237086426, guid: 82a976daaf5a1fb4e855d5c70df17171,
         type: 2}
@@ -2585,7 +2586,7 @@ Prefab:
     - target: {fileID: 224751520237086426, guid: 82a976daaf5a1fb4e855d5c70df17171,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224751520237086426, guid: 82a976daaf5a1fb4e855d5c70df17171,
         type: 2}
@@ -3190,11 +3191,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
