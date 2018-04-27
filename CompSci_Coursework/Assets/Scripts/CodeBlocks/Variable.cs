@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Variable{
 
@@ -35,6 +34,7 @@ public class Variable{
 		this.value = value;
 		if(index != -1 )
 		{
+			//Checks if index is valid
 			if (index < PlaySessionManager.ins.variableList.Count)
 			{
 				PlaySessionManager.ins.variableList[index].SetValue(value);
@@ -70,6 +70,7 @@ public class Variable{
 
 	public void SetIndex(int index)
 	{
+		//Checks if index is valid
 		if (index >= -1 || index < PlaySessionManager.ins.variableList.Count)
 		{
 			this.index = index;

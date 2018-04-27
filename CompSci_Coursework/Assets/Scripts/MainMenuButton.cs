@@ -10,6 +10,7 @@ public class MainMenuButton : MonoBehaviour {
 	void Start () {
 		if(mmButton != null)
 		{
+			//Adds an event
 			mmButton.onClick.AddListener(() => PlaySessionManager.ins.LoadScene("MainMenu"));
 		}
 	}

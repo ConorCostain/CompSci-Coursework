@@ -177,6 +177,7 @@ public class PlaySessionManager : MonoBehaviour {
 		return true;
 	}
 
+	//Counts the code blocks in the list
 	private int CodeBlockCount(Queue<GameObject> codeList)
 	{
 		int blockCount = 0;
@@ -191,6 +192,7 @@ public class PlaySessionManager : MonoBehaviour {
 				blockCount++;
 				if (codeBlock.blockType == CodeBlock.CodeBlockType.If || codeBlock.blockType == CodeBlock.CodeBlockType.While)
 				{
+					//Recursion Used to go into nested code lists
 					blockCount += CodeBlockCount(codeBlock.gameObject.GetComponent<CodeList>().codeList);
 				} 
 			}

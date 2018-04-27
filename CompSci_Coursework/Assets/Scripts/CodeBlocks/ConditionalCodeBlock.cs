@@ -11,6 +11,7 @@ public abstract class ConditionalCodeBlock : BaseCodeBlock{
 
 	public ConditionalCodeBlock(GameObject codeBlock, string comparitor)
 	{
+		//Gets reference to codeList
 		codeList = codeBlock.GetComponent<CodeList>();
 		this.comparitor = comparitor;
 	}

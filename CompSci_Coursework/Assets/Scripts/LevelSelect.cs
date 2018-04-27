@@ -15,14 +15,16 @@ public class LevelSelect : MonoBehaviour
 	public GameObject levelButton;
 	
 
-	//private Vector2 currentPosistion;
-
+	
+	//called before level starts
 	private void Awake()
 	{
+		//Gets data required to find the unity scenes
 		int amountOfScenes = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings;
 		List<string> levels = new List<string>();
 		string temp;
 
+		//Searches through the scenes for levels
 		for (int i = 0; i < amountOfScenes; i++)
 		{
 			temp = System.IO.Path.GetFileNameWithoutExtension(UnityEngine.SceneManagement.SceneUtility.GetScenePathByBuildIndex(i));
@@ -34,6 +36,7 @@ public class LevelSelect : MonoBehaviour
 		
 
 		Vector2 currentPosition;
+		//Loops through each of the levels
 		for (int i = 0; i < levels.Count; i++)
 		{
 			currentPosition = startPosistion + Vector2.right * horizontalSpacing * i;
@@ -42,13 +45,14 @@ public class LevelSelect : MonoBehaviour
 			{
 				currentPosition = PositionCalc(currentPosition);
 			}
+			//Sets up the Button
 			ButtonSetup(currentPosition, levelButton, i + 1, levels[i]);
 			
 
 		}
 	}
 
-	//Recurrence used
+	//Recursion used!!
 	private Vector2 PositionCalc(Vector2 currentPosition)
 	{
 		//Moves it back by a full length horizontally and down a row
@@ -81,6 +85,7 @@ public class LevelSelect : MonoBehaviour
 		PlaySessionManager.ins.LoadScene(sceneName);
 	}
 
+	//File Reading used
     public string GetHighScore(string levelName)
     {
         string highScore = "N/A";

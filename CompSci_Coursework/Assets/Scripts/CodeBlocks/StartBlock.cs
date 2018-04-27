@@ -8,6 +8,7 @@ public class StartBlock : MonoBehaviour {
 	public void StartInterpreter()
 	{
 		Debug.Log("Start Interpreter Called");
+		//Finds the codeList script
 		CodeList codeListScript = transform.parent.gameObject.GetComponent<CodeList>();
 		if (codeListScript != false)
 		{

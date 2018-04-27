@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class MainMenuScript : MonoBehaviour {
@@ -10,6 +8,7 @@ public class MainMenuScript : MonoBehaviour {
 
 	public void Awake()
 	{
+		//Setups up referenced buttons on click methods
 		if(playButton != null)
 		{
 			playButton.onClick.AddListener(() => PlaySessionManager.ins.LoadScene("SceneSelect") );
