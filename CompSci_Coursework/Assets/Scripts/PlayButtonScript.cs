@@ -29,12 +29,12 @@ public class PlayButtonScript : MonoBehaviour {
 		ObjectiveManager objManager = FindObjectOfType<ObjectiveManager>();
 		if (startBlocks.Where(b => b.transform.parent.tag == "CodeList").Count() > 1)
 		{
-			objManager.setInstruction("Too many start blocks on canvas!");
+			objManager.SetInstruction("Too many start blocks on canvas!");
 			Debug.Log("Too many start blocks on canvas!");
 		}
 		else if (startBlocks.Where(b => b.transform.parent.tag == "CodeList").Count() > 0)
 		{
-			objManager.setInstruction();
+			objManager.SetInstruction();
 			//Finds the start block that is 
 			startBlocks.Where(b => b.transform.parent.tag == "CodeList")
 				.FirstOrDefault().GetComponent<StartBlock>().StartInterpreter();
@@ -42,7 +42,7 @@ public class PlayButtonScript : MonoBehaviour {
 		else
 		{
 			Debug.Log("No start block on canvas!");
-			objManager.setInstruction("No start block on canvas!");
+			objManager.SetInstruction("No start block on canvas!");
 		}
 	}
 

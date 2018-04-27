@@ -47,7 +47,7 @@ public class ObjectiveManager : MonoBehaviour {
 			{
 				inputText.gameObject.SetActive(true);
 				inputText.SetText("Inputs:");
-				AddToTMP<int>(inputText, inputList);
+				AddToTMP(inputText, inputList);
 			}
 			//otherwise it will disable the UI element so it is out of the way
 			else
@@ -61,7 +61,7 @@ public class ObjectiveManager : MonoBehaviour {
 			{
 				expOutputText.gameObject.SetActive(true);
 				expOutputText.SetText("Expected Outputs:");
-				AddToTMP<int>(expOutputText, expectedOutputs);
+				AddToTMP(expOutputText, expectedOutputs);
 			}
 			//otherwise it will disable the UI element so it is out of the way
 			else
@@ -85,7 +85,7 @@ public class ObjectiveManager : MonoBehaviour {
 
 	}
 
-	public void setInstruction(string instruction = "")
+	public void SetInstruction(string instruction = "")
 	{
 		if(instruction == "")
 		{
@@ -98,38 +98,40 @@ public class ObjectiveManager : MonoBehaviour {
 		}
 	}
 
-	public static void AddToTMP<T>(TMP_Text text, List<T> list)
+	public static void AddToTMP(TMP_Text text, List<int> list)
 	{
-		foreach(T element in list)
+		foreach(int element in list)
 		{
-			AddToTMP<T>(text, element);
+			text.SetText(text.text + " " + element.ToString() + ",");
 		}
 	}
 
-	public static void AddToTMP<T>(TMP_Text text, T element)
+	public static void AddToTMP(TMP_Text text, int element)
 	{
 		text.SetText(text.text + " " + element.ToString() + ",");
 	}
 
-	public void WinFunc(int blocksUsed = 1)
+	public void WinFunc(int blocksUsed)
 	{
-		
+		//Shows the Win Popup
 		winPopup.SetActive(true);
 		try
 		{
+			//ensures it is the last sibling so that it is on top
 			//If already last sibling will throw an exception so this catches that
 			winPopup.transform.SetAsLastSibling();
 		}
 		catch {}
+
 		blocksUsedText.text = "Blocks Used : " + blocksUsed.ToString();
 		//Cast into floats and back into integers as otherwise the decimal values when divded were set to 0 and lost
 		int score = (int)(((float)minBlocks / (float)blocksUsed) * 100);
 		scoreText.text = "Score :" + score.ToString();
-		int highScore = getHighScore(SceneManager.GetActiveScene().name, score);
+		int highScore = GetHighScore(SceneManager.GetActiveScene().name, score);
 		highScoreText.text = "High Score : " + highScore.ToString();
 	}
 
-	public int getHighScore(string levelName, int score = 0)
+	private int GetHighScore(string levelName, int score = 0)
 	{
 		string highScoreFile;
 		int highScore = 0;
@@ -150,6 +152,7 @@ public class ObjectiveManager : MonoBehaviour {
 			}
 			catch { } 
 		}
+
 		if(score > highScore)
 		{
 			highScore = score;

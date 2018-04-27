@@ -37,7 +37,7 @@ public class PlaySessionManager : MonoBehaviour {
 		outputList.Add(output.GetValue());
 		if(outputText != null)
 		{
-			ObjectiveManager.AddToTMP<int>(outputText, output.GetValue());
+			ObjectiveManager.AddToTMP(outputText, output.GetValue());
 		}
 		
 	}
@@ -124,7 +124,7 @@ public class PlaySessionManager : MonoBehaviour {
 
 	private void ExecuteCodeList(Queue<GameObject> codeList)
 	{
-		Debug.Log("CodeList count = " + codeList.Count);
+		
 		//Temporary variables to hold values
 		GameObject temp = null;
 		CodeBlock tempScript = null;
@@ -149,19 +149,13 @@ public class PlaySessionManager : MonoBehaviour {
 
 	private void WinCheck(Queue<GameObject> codeList)
 	{
-		
+
 		if(ListCompare(outputList, expectedOutputs))
 		{
-			int blocksUsed = CodeBlockCount(codeList);
-			
-			objManager.WinFunc(blocksUsed);
+			objManager.WinFunc(CodeBlockCount(codeList));
 		}
 		else
 		{
-			Debug.Log("expOutput:");
-			expectedOutputs.ForEach(i => Debug.Log(i.ToString()));
-			Debug.Log("Output:");
-			outputList.ForEach(i => Debug.Log(i.ToString()));
 			// If outputs are not correct, then reset for next run
 			outputList = new List<int>();
 			clearOutputs = true;

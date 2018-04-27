@@ -327,6 +327,7 @@ GameObject:
   - component: {fileID: 1082795809}
   - component: {fileID: 1082795808}
   - component: {fileID: 1082795807}
+  - component: {fileID: 1082795810}
   m_Layer: 5
   m_Name: MainMenuButton
   m_TagString: Untagged
@@ -427,6 +428,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1082795805}
+--- !u!114 &1082795810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1082795805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dec73bf0d233bce4e90b1c93cbb9827e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mmButton: {fileID: 1082795807}
 --- !u!1 &1092589381
 GameObject:
   m_ObjectHideFlags: 0

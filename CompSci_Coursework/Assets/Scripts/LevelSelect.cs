@@ -19,7 +19,6 @@ public class LevelSelect : MonoBehaviour
 
 	private void Awake()
 	{
-		Vector2 currentPosistion;
 		int amountOfScenes = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings;
 		List<string> levels = new List<string>();
 		string temp;
@@ -32,38 +31,39 @@ public class LevelSelect : MonoBehaviour
 				levels.Add(temp);
 			}
 		}
-		Debug.Log(levels.Count.ToString());
+		
 
+		Vector2 currentPosition;
 		for (int i = 0; i < levels.Count; i++)
 		{
-			currentPosistion = startPosistion + Vector2.right * horizontalSpacing * i;
+			currentPosition = startPosistion + Vector2.right * horizontalSpacing * i;
 
-			if (currentPosistion.x >= startPosistion.x * -1) // needs fix
+			if (currentPosition.x >= startPosistion.x * -1)
 			{
-				currentPosistion = PosistionCalc(currentPosistion);
+				currentPosition = PositionCalc(currentPosition);
 			}
-			Debug.Log(currentPosistion.x.ToString() + ", " + currentPosistion.y.ToString());
-			ButtonSetup(currentPosistion, levelButton, i + 1, levels[i]);
+			ButtonSetup(currentPosition, levelButton, i + 1, levels[i]);
 			
 
 		}
 	}
 
 	//Recurrence used
-	private Vector2 PosistionCalc(Vector2 currentPosistion)
+	private Vector2 PositionCalc(Vector2 currentPosition)
 	{
-		currentPosistion = Vector2.right * (currentPosistion.x + (2 * startPosistion.x)) +
-			Vector2.up * (currentPosistion.y + verticalSpacing);
-		if (currentPosistion.x >= startPosistion.x * -1)
+		//Moves it back by a full length horizontally and down a row
+		currentPosition = Vector2.right * (currentPosition.x + (2 * startPosistion.x)) +
+			Vector2.up * (currentPosition.y + verticalSpacing);
+		//If thats not brought it back to the left enough it calls itself again to go down another line
+		if (currentPosition.x >= startPosistion.x * -1)
 		{
-			return PosistionCalc(currentPosistion);
+			return PositionCalc(currentPosition);
 		}
-		return currentPosistion;
+		return currentPosition;
 	}
 
 	private void ButtonSetup(Vector2 pos, GameObject buttonPrefab, int levelNumber, string sceneName)
 	{
-		Debug.Log("ButtonSetup Running");
 		Vector3 pos3 = Vector3.up * pos.y + Vector3.right * pos.x;
 		GameObject button = Instantiate(buttonPrefab, pos3, Quaternion.identity, gameObject.GetComponentInParent<Transform>());
 		button.GetComponent<RectTransform>().anchoredPosition = pos;
@@ -83,7 +83,7 @@ public class LevelSelect : MonoBehaviour
 
     public string GetHighScore(string levelName)
     {
-        string highScore = "0";
+        string highScore = "N/A";
         
         //checks to prevent trying to read a file that does not exist
         if (System.IO.File.Exists(levelName + ".txt"))
@@ -93,9 +93,6 @@ public class LevelSelect : MonoBehaviour
             {
                 highScore = reader.ReadLine();
             }
-
-
-            
         }
 
         return highScore;
