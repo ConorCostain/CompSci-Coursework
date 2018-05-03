@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//Use of inheritance
 public class IfBlock : ConditionalCodeBlock {
 
 	//Required for the ConditionalCodeBlock Instructor to run

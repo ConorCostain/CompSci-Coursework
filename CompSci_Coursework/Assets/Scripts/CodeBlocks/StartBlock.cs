@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//Use of inheritance
 public class StartBlock : MonoBehaviour {
 
 

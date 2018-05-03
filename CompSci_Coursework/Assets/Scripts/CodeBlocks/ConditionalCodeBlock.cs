@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//Use of Inheritance
 public abstract class ConditionalCodeBlock : BaseCodeBlock{
 
 	protected CodeList codeList;
