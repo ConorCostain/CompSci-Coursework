@@ -66,6 +66,7 @@ public class LevelSelect : MonoBehaviour
 		return currentPosition;
 	}
 
+	//Instantiates and sets up the values of the Button
 	private void ButtonSetup(Vector2 pos, GameObject buttonPrefab, int levelNumber, string sceneName)
 	{
 		Vector3 pos3 = Vector3.up * pos.y + Vector3.right * pos.x;
@@ -77,6 +78,7 @@ public class LevelSelect : MonoBehaviour
 
         Button buttonScript = button.GetComponent<Button>();
 
+		//Adds an event listener
 		buttonScript.onClick.AddListener(() => ButtonClick(sceneName));
 	}
 

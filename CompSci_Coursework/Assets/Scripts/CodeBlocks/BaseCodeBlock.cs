@@ -4,12 +4,12 @@ using System.Collections.Generic;
 //Use of an Abstract class
 public abstract class BaseCodeBlock{
 
+	//Declaring parameters
 	protected Variable param1 { get; set; }
 
 	protected Variable param2 { get; set; }
 
 	protected Variable param3 { get; set; }
-
 
 	//Abstract method
 	public abstract void CodeBlockFunction();

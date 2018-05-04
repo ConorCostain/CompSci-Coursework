@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-//Use of Inheriance
+﻿//Use of Inheritance
 public abstract class OperatorCodeBlock :VariableSet {
 
 	protected delegate Variable OperatorFunction(Variable var1, Variable var2);

@@ -94,6 +94,7 @@ public class CodeList : MonoBehaviour
 	}
 
 	//Removes a element from a queue without altering the order of it
+	//Advanced Algorithm used
 	private Queue<GameObject> ElementExtractor(Queue<GameObject> queue, GameObject element)
 	{
 		Queue<GameObject> newQueue = new Queue<GameObject>();

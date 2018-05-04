@@ -18,19 +18,15 @@ public class Variable{
 	{
 		this.value = value;
 		this.name = name;
+		//Checks that it is an invalid index
 		if (index >= -1 && index <= PlaySessionManager.ins.variableList.Count)
 		{
 			this.index = index;
-		}
-		else
-		{
-			Debug.Log("invalid constructor index value");
 		}
 	}
 
 	public void SetValue(int value)
 	{
-
 		this.value = value;
 		if(index != -1 )
 		{
@@ -38,10 +34,6 @@ public class Variable{
 			if (index < PlaySessionManager.ins.variableList.Count)
 			{
 				PlaySessionManager.ins.variableList[index].SetValue(value);
-			}
-			else
-			{
-				Debug.Log("Index Value Out of Variable list range");
 			}
 		}
 	}
@@ -74,10 +66,6 @@ public class Variable{
 		if (index >= -1 || index < PlaySessionManager.ins.variableList.Count)
 		{
 			this.index = index;
-		}
-		else
-		{
-			Debug.Log("Invalid set index value");
 		}
 	}
 

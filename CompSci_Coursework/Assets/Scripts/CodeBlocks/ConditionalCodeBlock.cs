@@ -4,7 +4,9 @@ using UnityEngine;
 //Use of Inheritance
 public abstract class ConditionalCodeBlock : BaseCodeBlock{
 
+	//Reference to the code list attatched to the conditional block
 	protected CodeList codeList;
+	//Stores the comparitor
 	protected string comparitor;
 
 	protected delegate bool Comparison(Variable var1, Variable var2);
@@ -25,6 +27,7 @@ public abstract class ConditionalCodeBlock : BaseCodeBlock{
 		switch (comparitor)
 		{
 			//Sets the delegate comparison to the corresponding logical operation
+			//Uses an Anonymous function and lambda expresion to define the delegate
 			case "==":
 				comparison = (x, y) => (x == y);
 				break;

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayButtonScript : MonoBehaviour {
 
+	//reference to button
 	private Button playButton;
 	
 	public void Start()

@@ -5,10 +5,10 @@ using UnityEngine;
 //Use of inheritance
 public class WhileBlock : ConditionalCodeBlock
 {
-
 	//Required for the ConditionalCodeBlock Instructor to run
 	public WhileBlock(GameObject codeBlock, string comparitor) : base(codeBlock, comparitor) { }
 
+	//Use of Method Overriding
 	public override void CodeBlockFunction()
 	{
 		//Gets the comparison function and invokes it using the params

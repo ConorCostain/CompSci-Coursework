@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-//Use of inheritance
+﻿//Use of inheritance
 public class OutputBlock : BaseCodeBlock {
 
+	//Use of Method Overriding
 	public override void CodeBlockFunction()
 	{
 		//Calls the output method in PlaySessionManager to handle the output
