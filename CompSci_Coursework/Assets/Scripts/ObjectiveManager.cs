@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -46,7 +45,7 @@ public class ObjectiveManager : MonoBehaviour {
 			if (showInputs)
 			{
 				inputText.gameObject.SetActive(true);
-				inputText.SetText("Inputs:");
+				inputText.text = "Inputs:";
 				AddToTMP(inputText, inputList);
 			}
 			//otherwise it will disable the UI element so it is out of the way
@@ -60,7 +59,7 @@ public class ObjectiveManager : MonoBehaviour {
 			if (showExpectedOutput)
 			{
 				expOutputText.gameObject.SetActive(true);
-				expOutputText.SetText("Expected Outputs:");
+				expOutputText.text = "Expected Outputs:";
 				AddToTMP(expOutputText, expectedOutputs);
 			}
 			//otherwise it will disable the UI element so it is out of the way
@@ -74,7 +73,7 @@ public class ObjectiveManager : MonoBehaviour {
 			if (showOutputs)
 			{
 				outputText.gameObject.SetActive(true);
-				outputText.SetText("Outputs:");
+				outputText.text = "Outputs:";
 			}
 			//otherwise it will disable the UI element so it is out of the way
 			else
